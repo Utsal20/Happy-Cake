@@ -5,15 +5,16 @@ import 'package:mailer/smtp_server/gmail.dart';
 class Emailer {
   static email() async {
     String username = 'happycaketest@gmail.com';
-    String password = 'Pirates88';
+    String password = 'P!rates88';
 
     final smtpServer = gmail(username, password);
     
     // Create our message.
+    final dateTime = new DateTime.now();
     final message = new Message()
-      ..from = new Address(username, 'Happy Cake Test')
+      ..from = new Address(username, 'Put name of the client')
       ..recipients.add('happycaketest@gmail.com')
-      ..subject = 'Test Email ${new DateTime.now()}'
+      ..subject = 'Order ${dateTime.month}-${dateTime.day}-${dateTime.year}'
       ..text = 'This is the plain text.\nThis is line 2 of the text part.';
     
     final sendReports = await send(message, smtpServer);
