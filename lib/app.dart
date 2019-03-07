@@ -9,7 +9,19 @@ class HappyCakeApp extends StatelessWidget {
         brightness: Brightness.light,
         primaryColor: Color(0xFFfd689a),
         accentColor: Color(0xFF66d9c1),
-        fontFamily: 'Roboto'
+        fontFamily: 'Roboto',
+        textTheme: TextTheme(
+          headline: TextStyle(
+            fontSize: 35.0,
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).accentColor,
+          ),
+          title: TextStyle(
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).accentColor,
+          ),
+        ),
       ),
       home: Home()
     );
