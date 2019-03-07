@@ -27,7 +27,7 @@ class Home extends StatefulWidget {
              icon: Icon(Icons.cake),
            ),
            BottomNavigationBarItem(
-             title: Text('User Info'),
+             title: Text('Client Info'),
              icon: Icon(Icons.account_box),
            ),
            BottomNavigationBarItem(
@@ -42,5 +42,6 @@ class Home extends StatefulWidget {
     setState(() {
       _currentIndex = index;
     });
+    
   }
 }
