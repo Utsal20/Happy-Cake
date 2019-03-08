@@ -6,6 +6,7 @@ class Emailer {
   static email() async {
     String username = 'happycaketest@gmail.com';
     String password = 'P!rates88';
+    Attachment _attachment;
 
     final smtpServer = gmail(username, password);
     
@@ -15,7 +16,8 @@ class Emailer {
       ..from = new Address(username, 'Put name of the client')
       ..recipients.add('happycaketest@gmail.com')
       ..subject = 'Order ${dateTime.month}-${dateTime.day}-${dateTime.year}'
-      ..text = 'This is the plain text.\nThis is line 2 of the text part.';
+      ..text = 'This is the plain text.\nThis is line 2 of the text part.'
+      ..attachments.add(_attachment);
     
     final sendReports = await send(message, smtpServer);
 
