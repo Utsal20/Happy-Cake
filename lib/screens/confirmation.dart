@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'user_info.dart';
+import 'data.dart';
 
-class ConfirmationData {
-  String name;
-  static String email = 'asdsad';
-  String phone;
-  set _email(String e) => email = e;
+class Confirmation extends StatefulWidget {
+  @override
+  _ConfirmationState createState() => _ConfirmationState();
 }
 
 class _ConfirmationState extends State<Confirmation> {
@@ -27,15 +25,19 @@ class _ConfirmationState extends State<Confirmation> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    'Flavor Combination Goes Here',
+                    DataStore.flavor,
                     textAlign: TextAlign.left,
                   ),
                   Text(
-                    ConfirmationData.email,
+                    DataStore.feeds + ' people',
                     textAlign: TextAlign.left,
                   ),
                   Text(
-                    'Occasion For the Cake Goes Here',
+                    DataStore.function,
+                    textAlign: TextAlign.left,
+                  ),
+                  Text(
+                    DataStore.date,
                     textAlign: TextAlign.left,
                   ),
                 ],
@@ -46,15 +48,11 @@ class _ConfirmationState extends State<Confirmation> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    'Your Order will be ready on goes here',
-                    textAlign: TextAlign.left,
-                  ),
-                  Text(
                     '1312 N Mullan Rd.\nSpokane Valley, WA 99206\nTues-Sat 9-5pm\n509-924-8455',
                     textAlign: TextAlign.left,
                   ),
                   Text(
-                    'Please call us with any additional info',
+                    'Please call us with any additional info.',
                     textAlign: TextAlign.left,
                   ),
                 ],

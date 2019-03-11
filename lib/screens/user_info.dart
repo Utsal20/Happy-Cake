@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'data.dart';
 
 class UserInfo extends StatefulWidget {
   @override
@@ -7,9 +8,6 @@ class UserInfo extends StatefulWidget {
 
 class _UserInfoState extends State<UserInfo> {
   final GlobalKey<FormState> _clientKey = GlobalKey<FormState>();
-  String _name;
-  String _email;
-  String _phone;
   bool _autoValidate = false;
 
   @override
@@ -33,38 +31,41 @@ class _UserInfoState extends State<UserInfo> {
                   children: <Widget> [
                     Flexible(
                       child: TextFormField(
+                        initialValue: DataStore.name,
                         decoration: InputDecoration(
                           hintText: 'John Doe',
                           labelText: 'Name',
                         ),
                         keyboardType: TextInputType.text,
                         onSaved: (String value) {
-                          _name = value;
+                          DataStore.name = value;
                         }
                       ),
                     ),
                     Flexible(
                       child: TextFormField(
+                        initialValue: DataStore.phone,
                         decoration: InputDecoration(
                           hintText: '1234567890',
                           labelText: 'Phone',
                         ),
-                        keyboardType: TextInputType.phone,
+                        keyboardType: TextInputType.number,
                         onSaved: (String value) {
-                          _phone = value;
+                          DataStore.phone = value;
                         },
                         validator: _phoneValidation,
                       ),
                     ),
                     Flexible(
                       child: TextFormField(
+                        initialValue: DataStore.email,
                         decoration: InputDecoration(
                           hintText: 'you@example.com',
                           labelText: 'Email',
                         ),
                         keyboardType: TextInputType.emailAddress,
                         onSaved: (String value) {
-                          _email = value;
+                          DataStore.email = value;
                         },
                         validator: _emailValidation,
                       ),
