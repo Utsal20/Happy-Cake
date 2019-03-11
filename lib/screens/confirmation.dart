@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'data.dart';
+import 'package:happy_cake/emailer.dart';
 
 class Confirmation extends StatefulWidget {
   @override
@@ -57,10 +58,36 @@ class _ConfirmationState extends State<Confirmation> {
                   ),
                 ],
               ),
-            )
+            ),
+            RaisedButton(
+                child: Icon(Icons.pregnant_woman),
+                elevation: 4.0,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(100.0)),
+                color: Colors.green[300],
+                splashColor: Colors.blue[300],
+                onPressed: sendEmail,
+              ),
           ],
         )
       )
     );
   }
+}
+
+void sendEmail() async {
+  String emailText = '''
+    <b>Customer Info</b><br/>
+    Name: ${DataStore.name}<br/>
+    Email: ${DataStore.email}<br/>
+    Phone: ${DataStore.phone}<br/>
+    <br/>
+    <b>Order Info</b><br/>
+    Date needed: ${DataStore.date}<br/>
+    Size: ${DataStore.feeds} people<br/>
+    Function: ${DataStore.function}<br/>
+    Flavor combination: ${DataStore.flavor}<br/>
+    Decoration notes: ${DataStore.decorationNotes}<br/>
+    ''';
+  Emailer.email(DataStore.name, emailText);
 }
