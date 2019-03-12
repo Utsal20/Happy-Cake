@@ -21,6 +21,9 @@ class HappyCakeApp extends StatelessWidget {
             fontWeight: FontWeight.bold,
             color: Theme.of(context).accentColor,
           ),
+          body1: TextStyle(
+            fontSize: 17.0,
+          ),
         ),
       ),
       home: Home()

@@ -11,71 +11,91 @@ class _ConfirmationState extends State<Confirmation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              'Order Info',
-              textAlign: TextAlign.left,
-              style: Theme.of(context).textTheme.headline,
-            ),
-            Flexible(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    DataStore.flavor,
-                    textAlign: TextAlign.left,
+        body: Container(
+          padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+            child: Column(
+              children: <Widget>[
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget> [
+                    Text(
+                    'Order Info',
+                    style: Theme.of(context).textTheme.headline,
+                    textAlign: TextAlign.center,
+                    ),
+                  ]
+                ),
+                Flexible(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Flexible(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            Text(
+                              'You Ordered:\n',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              DataStore.flavor,
+                            ),
+                            Text(
+                              DataStore.feeds + ' people',
+                            ),
+                            Text(
+                              DataStore.function,
+                            ),
+                            Text(
+                              DataStore.date,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Flexible(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          
+                          children: <Widget>[
+                            Text(
+                              'Contact us at:\n',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                )
+                            ),
+                            Text(
+                              '1312 N Mullan Rd.\nSpokane Valley, WA 99206\nTues-Sat 9-5pm\n509-924-8455',
+                            ),
+                            Text(
+                              'Please call us with any additional info.',
+                            ),
+                          ],
+                        ),
+                      ),
+                    ]
                   ),
-                  Text(
-                    DataStore.feeds + ' people',
-                    textAlign: TextAlign.left,
+                ),
+                RaisedButton(
+                  child: Icon(Icons.pregnant_woman),
+                  elevation: 4.0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(100.0)
                   ),
-                  Text(
-                    DataStore.function,
-                    textAlign: TextAlign.left,
-                  ),
-                  Text(
-                    DataStore.date,
-                    textAlign: TextAlign.left,
-                  ),
-                ],
-              ),
-            ),
-            Flexible(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    '1312 N Mullan Rd.\nSpokane Valley, WA 99206\nTues-Sat 9-5pm\n509-924-8455',
-                    textAlign: TextAlign.left,
-                  ),
-                  Text(
-                    'Please call us with any additional info.',
-                    textAlign: TextAlign.left,
-                  ),
-                ],
-              ),
-            ),
-            RaisedButton(
-                child: Icon(Icons.pregnant_woman),
-                elevation: 4.0,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(100.0)),
-                color: Colors.green[300],
-                splashColor: Colors.blue[300],
-                onPressed: sendEmail,
-              ),
-          ],
-        )
-      )
-    );
-  }
-}
-
-void sendEmail() async {
+                  color: Colors.green[300],
+                  splashColor: Colors.blue[300],
+                  onPressed: sendEmail,
+                ),
+              ],
+            )
+          )
+        );
+      }
+    }
+  void sendEmail() async {
   String emailText = '''
     <b>Customer Info</b><br/>
     Name: ${DataStore.name}<br/>
