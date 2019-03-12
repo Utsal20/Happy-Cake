@@ -8,6 +8,7 @@ class OrderInfo extends StatefulWidget {
 
 class _OrderInfoState extends State<OrderInfo> {
   final GlobalKey<FormState> _orderKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,6 +20,7 @@ class _OrderInfoState extends State<OrderInfo> {
                 textAlign: TextAlign.left,
                 style: Theme.of(context).textTheme.headline,
               ),
+
               Flexible(
                   child: Form(
                       key: _orderKey,
@@ -26,16 +28,14 @@ class _OrderInfoState extends State<OrderInfo> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Flexible(
-                              child: TextFormField(
-                                  initialValue: DataStore.date,
-                                  decoration: InputDecoration(
-                                    hintText: 'EX: January 12th, 2019',
-                                    labelText: 'Date need:',
-                                  ),
-                                  keyboardType: TextInputType.text,
-                                  onSaved: (String value) {
-                                    DataStore.date = value;
-                                  }),
+                              child: RaisedButton(
+                                child: Icon(Icons.calendar_today),
+                                elevation: 4.0,
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+                                color: Colors.blue[300],
+                                splashColor: Colors.blue[300],
+                                onPressed: _selectDate,
+                              ),
                             ),
                             Flexible(
                               child: TextFormField(
@@ -109,16 +109,32 @@ class _OrderInfoState extends State<OrderInfo> {
                                       DataStore.decorationNotes = value;
                                     }))
                           ]))),
+
               RaisedButton(
-                child: Icon(Icons.pregnant_woman),
-                elevation: 4.0,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(100.0)),
-                color: Colors.green[300],
-                splashColor: Colors.blue[300],
-                onPressed: saveOrderInfo,
+                  child: Icon(Icons.pregnant_woman),
+                  elevation: 4.0,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100.0)),
+                  color: Colors.green[300],
+                  splashColor: Colors.blue[300],
+                  onPressed: saveOrderInfo,
               ),
-            ])));
+            ]
+            )
+        )
+    );
+  }
+
+  Future _selectDate() async {
+    DateTime picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now().add(Duration(days: 7)),
+      firstDate: DateTime.now(),
+      lastDate: DateTime.now().add(Duration(days: 365)),
+    );
+    if (picked != null) {
+      print('Date picked: ${picked.toString()}');
+      setState(() { DataStore.date = picked.toString(); });
+    }
   }
 
   void saveOrderInfo() {
