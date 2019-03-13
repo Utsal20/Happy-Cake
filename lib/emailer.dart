@@ -3,7 +3,7 @@ import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server/gmail.dart';
 
 class Emailer {
-  static email(String clientName, String text) async {
+  static email(String clientName, String clientEmail, String text) async {
     String username = 'happycaketest@gmail.com';
     String password = 'P!rates88';
 
@@ -14,6 +14,7 @@ class Emailer {
     final message = new Message()
       ..from = new Address(username, clientName)
       ..recipients.add('happycaketest@gmail.com')
+      ..ccRecipients.add(clientEmail)
       ..subject = 'Order ${dateTime.month}-${dateTime.day}-${dateTime.year}'
       ..html = text;
     
