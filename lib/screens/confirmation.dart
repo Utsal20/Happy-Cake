@@ -13,88 +13,63 @@ class _ConfirmationState extends State<Confirmation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-            padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
-            child: Column(
-              children: <Widget>[
-                Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      Text(
-                        'Order Info',
-                        style: Theme.of(context).textTheme.headline,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
-                Flexible(
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Flexible(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: <Widget>[
-                              Text(
-                                'You Ordered:\n',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Text(
-                                DataStore.flavor,
-                              ),
-                              Text(
-                                DataStore.feeds + ' people',
-                              ),
-                              Text(
-                                DataStore.function,
-                              ),
-                              Text(
-                                DataStore.date,
-                              ),
-                            ],
-                          ),
-                        ),
-                        Flexible(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text('Contact us at:\n',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  )),
-                              Text(
-                                '1312 N Mullan Rd.\nSpokane Valley, WA 99206\nTues-Sat 9-5pm\n509-924-8455',
-                              ),
-                              Text(
-                                'Please call us with any additional info.',
-                              ),
-                            ],
-                          ),
-                        ),
-                      ]),
+        appBar: AppBar(
+          title: Text('Order Confirmation'),
+        ),
+        body: Center(
+          child: Column(
+            children: <Widget>[
+              Text(
+                'You Ordered:\n',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
                 ),
-                submitted
-                    ? Text(
-                        'Your order has been sent!',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.blue[300],
-                        ),
-                      )
-                    : RaisedButton(
-                        child: Text('Submit'),
-                        elevation: 4.0,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(100.0)),
-                        color: Colors.green[300],
-                        splashColor: Colors.blue[300],
-                        onPressed: sendEmail,
+              ),
+              Text(
+                DataStore.flavor,
+              ),
+              Text(
+                DataStore.feeds + ' people',
+              ),
+              Text(
+                DataStore.function,
+              ),
+              Text(
+                DataStore.date,
+              ),
+              Text(
+                'Contact us at:\n',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                )
+              ),
+              Text(
+                '1312 N Mullan Rd.\nSpokane Valley, WA 99206\nTues-Sat 9-5pm\n509-924-8455',
+              ),
+              Text(
+                'Please call us with any additional info.',
+              ),
+              submitted
+                  ? Text(
+                      'Your order has been sent!',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).accentColor,
                       ),
+                    )
+                  : RaisedButton(
+                      child: Text('Submit'),
+                      elevation: 4.0,
+                      shape: RoundedRectangleBorder(
+                         borderRadius: BorderRadius.circular(100.0)),
+                      color: Colors.green[300],
+                      splashColor: Theme.of(context).accentColor,
+                      onPressed: sendEmail,
+                    ),
               ],
-            )));
+            ),
+          )
+        );
   }
 
   void sendEmail() async {
@@ -115,6 +90,8 @@ class _ConfirmationState extends State<Confirmation> {
       setState(() {
         submitted = true;
       });
-    }, onError: (e) { print(e);});
+    }, onError: (e) {
+      print(e);
+    });
   }
 }

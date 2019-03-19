@@ -12,15 +12,12 @@ class _OrderInfoState extends State<OrderInfo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Cake Order Request'),
+      ),
         body: Container(
             padding: EdgeInsets.fromLTRB(20, 20, 20, .1),
             child: Column(children: <Widget>[
-              Text(
-                'Order a Cake',
-                textAlign: TextAlign.left,
-                style: Theme.of(context).textTheme.headline,
-              ),
-
               Flexible(
                   child: Form(
                       key: _orderKey,
@@ -103,21 +100,26 @@ class _OrderInfoState extends State<OrderInfo> {
                                           'Ex: I want the cake to be yellow flowers',
                                       labelText: 'Decoration Notes:',
                                     ),
-                                    keyboardType: TextInputType.multiline,
+                                    keyboardType: TextInputType.text,
                                     maxLines: null,
                                     onSaved: (String value) {
                                       DataStore.decorationNotes = value;
                                     }))
                           ]))),
 
-              RaisedButton(
+              Container( 
+                padding:EdgeInsets.only(bottom: 40),
+                child: RaisedButton(
                   child: Icon(Icons.pregnant_woman),
                   elevation: 4.0,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100.0)),
                   color: Colors.green[300],
-                  splashColor: Colors.blue[300],
-                  onPressed: saveOrderInfo,
-              ),
+                  splashColor: Theme.of(context).accentColor,
+                  onPressed: () {
+                    saveOrderInfo();
+                    Navigator.of(context).pushNamed('/b');
+                  }
+              ),),
             ]
             )
         )
