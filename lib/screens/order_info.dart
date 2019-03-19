@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:core';
 import 'data.dart';
 
 class OrderInfo extends StatefulWidget {
@@ -110,7 +111,7 @@ class _OrderInfoState extends State<OrderInfo> {
               Container( 
                 padding:EdgeInsets.only(bottom: 40),
                 child: RaisedButton(
-                  child: Icon(Icons.pregnant_woman),
+                  child: Icon(Icons.arrow_forward),
                   elevation: 4.0,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100.0)),
                   color: Colors.green[300],
@@ -126,7 +127,7 @@ class _OrderInfoState extends State<OrderInfo> {
     );
   }
 
-  Future _selectDate() async {
+  _selectDate() async {
     DateTime picked = await showDatePicker(
       context: context,
       initialDate: DateTime.now().add(Duration(days: 7)),
