@@ -18,6 +18,7 @@ class _ConfirmationState extends State<Confirmation> {
         ),
         body: Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
                 'You Ordered:\n',

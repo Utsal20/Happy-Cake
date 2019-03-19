@@ -75,13 +75,13 @@ class _UserInfoState extends State<UserInfo> {
             Container(
               padding: EdgeInsets.only(bottom: 40),
               child: RaisedButton(
-              child: Icon(Icons.pregnant_woman),
+              child: Icon(Icons.arrow_forward),
               elevation: 4.0,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100.0)),
               color: Colors.green[300],
               splashColor: Theme.of(context).accentColor,
               onPressed: () {
-                _ValidateInputs();
+                _validateInputs();
               }
             ),),
           ],
@@ -90,7 +90,7 @@ class _UserInfoState extends State<UserInfo> {
     );
   }
   
-  bool _ValidateInputs() {
+  bool _validateInputs() {
     if (_clientKey.currentState.validate()) {
       _clientKey.currentState.save();
       Navigator.of(context).pushNamed('/c');
