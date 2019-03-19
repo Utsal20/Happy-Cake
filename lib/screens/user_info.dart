@@ -13,15 +13,13 @@ class _UserInfoState extends State<UserInfo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Client Info'),
+      ),
       body: Container(
         padding: EdgeInsets.fromLTRB(20, 20, 20, .1),
         child: Column(
           children: <Widget>[
-            Text(
-              'Client Info',
-              textAlign: TextAlign.left,
-              style: Theme.of(context).textTheme.headline,
-            ),
             Flexible(
               child: Form(
                 key: _clientKey,
@@ -74,27 +72,28 @@ class _UserInfoState extends State<UserInfo> {
                 )
               )
             ),
-            RaisedButton(
+            Container(
+              padding: EdgeInsets.only(bottom: 40),
+              child: RaisedButton(
               child: Icon(Icons.pregnant_woman),
               elevation: 4.0,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100.0)),
               color: Colors.green[300],
-              splashColor: Colors.blue[300],
-              onPressed: _sendEmail,
-            ),
+              splashColor: Theme.of(context).accentColor,
+              onPressed: () {
+                _ValidateInputs();
+              }
+            ),),
           ],
         )
       )
     );
   }
-  void _sendEmail() {
-    if (_ValidateInputs()) {
-
-    }
-  }
+  
   bool _ValidateInputs() {
     if (_clientKey.currentState.validate()) {
       _clientKey.currentState.save();
+      Navigator.of(context).pushNamed('/c');
       return true;
     } else {
       setState(() {
