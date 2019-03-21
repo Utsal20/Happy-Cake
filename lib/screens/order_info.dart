@@ -16,7 +16,17 @@ class _OrderInfoState extends State<OrderInfo> {
       appBar: AppBar(
         title: Text('Cake Order Request'),
       ),
-        body: Container(
+      body: GestureDetector(
+        onHorizontalDragEnd: (DragEndDetails details) {
+          if (details.primaryVelocity == 0)
+            return;
+          if (details.primaryVelocity.compareTo(0) == -1) {
+            saveOrderInfo();
+            Navigator.of(context).pushNamed('/b');
+          }
+        },
+        child: Container(
+            color: Colors.white,
             padding: EdgeInsets.fromLTRB(20, 20, 20, .1),
             child: Column(children: <Widget>[
               Flexible(
@@ -124,6 +134,7 @@ class _OrderInfoState extends State<OrderInfo> {
             ]
             )
         )
+      )
     );
   }
 
