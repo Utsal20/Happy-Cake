@@ -74,16 +74,31 @@ class _UserInfoState extends State<UserInfo> {
             ),
             Container(
               padding: EdgeInsets.only(bottom: 40),
-              child: RaisedButton(
-              child: Icon(Icons.arrow_forward),
-              elevation: 4.0,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100.0)),
-              color: Colors.green[300],
-              splashColor: Theme.of(context).accentColor,
-              onPressed: () {
-                _validateInputs();
-              }
-            ),),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  RaisedButton(
+                    child: Icon(Icons.arrow_back),
+                    elevation: 4.0,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100.0)),
+                    color: Colors.green[300],
+                    splashColor: Theme.of(context).accentColor,
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    }
+                  ),
+                  RaisedButton(
+                    child: Icon(Icons.arrow_forward),
+                    elevation: 4.0,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100.0)),
+                    color: Colors.green[300],
+                    splashColor: Theme.of(context).accentColor,
+                    onPressed: () {
+                      _validateInputs();
+                    }
+                  ),
+              ],)
+            ),
           ],
         )
       )

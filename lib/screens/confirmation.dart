@@ -18,38 +18,48 @@ class _ConfirmationState extends State<Confirmation> {
         ),
         body: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              Text(
-                'You Ordered:\n',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                DataStore.flavor,
-              ),
-              Text(
-                DataStore.feeds + ' people',
-              ),
-              Text(
-                DataStore.function,
-              ),
-              Text(
-                DataStore.date,
-              ),
-              Text(
-                'Contact us at:\n',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                )
-              ),
-              Text(
-                '1312 N Mullan Rd.\nSpokane Valley, WA 99206\nTues-Sat 9-5pm\n509-924-8455',
-              ),
-              Text(
-                'Please call us with any additional info.',
-              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    'Your Order:                                    \n',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                  ),
+                  Text(
+                    DataStore.flavor,
+                  ),
+                  Text(
+                    DataStore.feeds + ' people',
+                  ),
+                  Text(
+                    DataStore.function,
+                  ),
+                  Text(
+                    DataStore.date,
+                  ),
+              ],),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    'Contact us at:\n',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    )
+                  ),
+                  Text(
+                    '1312 N Mullan Rd.\nSpokane Valley, WA 99206\nTues-Sat 9-5pm\n509-924-8455',
+                  ),
+                  Text(
+                    'Please call us with any additional info.',
+                  ),
+              ],),
               submitted
                   ? Text(
                       'Your order has been sent!',
@@ -58,15 +68,35 @@ class _ConfirmationState extends State<Confirmation> {
                         color: Theme.of(context).accentColor,
                       ),
                     )
-                  : RaisedButton(
-                      child: Text('Submit'),
+                  : ButtonTheme(
+                    minWidth: 150,
+                    child: RaisedButton(
+                      child: Text(
+                        'Submit',
+                        style: TextStyle(fontSize: 20),
+                      ),
                       elevation: 4.0,
                       shape: RoundedRectangleBorder(
                          borderRadius: BorderRadius.circular(100.0)),
-                      color: Colors.green[300],
+                      color: Colors.blue[300],
                       splashColor: Theme.of(context).accentColor,
                       onPressed: sendEmail,
                     ),
+                  ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  RaisedButton(
+                    child: Icon(Icons.arrow_back),
+                    elevation: 4.0,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100.0)),
+                    color: Colors.green[300],
+                    splashColor: Theme.of(context).accentColor,
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    }
+                  ),
+                ],)
               ],
             ),
           )
