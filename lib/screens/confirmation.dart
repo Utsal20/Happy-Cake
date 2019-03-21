@@ -16,7 +16,15 @@ class _ConfirmationState extends State<Confirmation> {
         appBar: AppBar(
           title: Text('Order Confirmation'),
         ),
-        body: Center(
+        body: GestureDetector(
+        onHorizontalDragEnd: (DragEndDetails details) {
+          if (details.primaryVelocity == 0)
+            return;
+          if (details.primaryVelocity.compareTo(0) != -1)
+            Navigator.of(context).pop();
+        },
+        child: Container(
+          color: Colors.white,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
@@ -100,7 +108,7 @@ class _ConfirmationState extends State<Confirmation> {
               ],
             ),
           )
-        );
+        ));
   }
 
   void sendEmail() async {

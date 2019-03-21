@@ -10,96 +10,109 @@ class _UserInfoState extends State<UserInfo> {
   final GlobalKey<FormState> _clientKey = GlobalKey<FormState>();
   bool _autoValidate = false;
 
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Client Info'),
       ),
-      body: Container(
-        padding: EdgeInsets.fromLTRB(20, 20, 20, .1),
-        child: Column(
-          children: <Widget>[
-            Flexible(
-              child: Form(
-                key: _clientKey,
-                autovalidate: _autoValidate,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget> [
-                    Flexible(
-                      child: TextFormField(
-                        initialValue: DataStore.name,
-                        decoration: InputDecoration(
-                          hintText: 'John Doe',
-                          labelText: 'Name',
+      body: GestureDetector(
+        onHorizontalDragEnd: (DragEndDetails details) {
+          if (details.primaryVelocity == 0)
+            return;
+          if (details.primaryVelocity.compareTo(0) == -1)
+            _validateInputs();
+          else
+            Navigator.of(context).pop();
+        },
+        child: Container(
+          color: Colors.white,
+          padding: EdgeInsets.fromLTRB(20, 20, 20, .1),
+          child: Column(
+            children: <Widget>[
+              Flexible(
+                child: Form(
+                  key: _clientKey,
+                  autovalidate: _autoValidate,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget> [
+                      Flexible(
+                        child: TextFormField(
+                          initialValue: DataStore.name,
+                          decoration: InputDecoration(
+                            hintText: 'John Doe',
+                            labelText: 'Name',
+                          ),
+                          keyboardType: TextInputType.text,
+                          onSaved: (String value) {
+                            DataStore.name = value;
+                          }
                         ),
-                        keyboardType: TextInputType.text,
-                        onSaved: (String value) {
-                          DataStore.name = value;
-                        }
                       ),
-                    ),
-                    Flexible(
-                      child: TextFormField(
-                        initialValue: DataStore.phone,
-                        decoration: InputDecoration(
-                          hintText: '1234567890',
-                          labelText: 'Phone',
+                      Flexible(
+                        child: TextFormField(
+                          initialValue: DataStore.phone,
+                          decoration: InputDecoration(
+                            hintText: '1234567890',
+                            labelText: 'Phone',
+                          ),
+                          keyboardType: TextInputType.number,
+                          onSaved: (String value) {
+                            DataStore.phone = value;
+                          },
+                          validator: _phoneValidation,
                         ),
-                        keyboardType: TextInputType.number,
-                        onSaved: (String value) {
-                          DataStore.phone = value;
-                        },
-                        validator: _phoneValidation,
                       ),
-                    ),
-                    Flexible(
-                      child: TextFormField(
-                        initialValue: DataStore.email,
-                        decoration: InputDecoration(
-                          hintText: 'you@example.com',
-                          labelText: 'Email',
+                      Flexible(
+                        child: TextFormField(
+                          initialValue: DataStore.email,
+                          decoration: InputDecoration(
+                            hintText: 'you@example.com',
+                            labelText: 'Email',
+                          ),
+                          keyboardType: TextInputType.emailAddress,
+                          onSaved: (String value) {
+                            DataStore.email = value;
+                          },
+                          validator: _emailValidation,
                         ),
-                        keyboardType: TextInputType.emailAddress,
-                        onSaved: (String value) {
-                          DataStore.email = value;
-                        },
-                        validator: _emailValidation,
                       ),
-                    ),
-                  ]
+                    ]
+                  )
                 )
-              )
-            ),
-            Container(
-              padding: EdgeInsets.only(bottom: 40),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  RaisedButton(
-                    child: Icon(Icons.arrow_back),
-                    elevation: 4.0,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100.0)),
-                    color: Colors.green[300],
-                    splashColor: Theme.of(context).accentColor,
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    }
-                  ),
-                  RaisedButton(
-                    child: Icon(Icons.arrow_forward),
-                    elevation: 4.0,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100.0)),
-                    color: Colors.green[300],
-                    splashColor: Theme.of(context).accentColor,
-                    onPressed: () {
-                      _validateInputs();
-                    }
-                  ),
-              ],)
-            ),
-          ],
+              ),
+              Container(
+                padding: EdgeInsets.only(bottom: 40),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    RaisedButton(
+                      child: Icon(Icons.arrow_back),
+                      elevation: 4.0,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100.0)),
+                      color: Colors.green[300],
+                      splashColor: Theme.of(context).accentColor,
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      }
+                    ),
+                    RaisedButton(
+                      child: Icon(Icons.arrow_forward),
+                      elevation: 4.0,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100.0)),
+                      color: Colors.green[300],
+                      splashColor: Theme.of(context).accentColor,
+                      onPressed: () {
+                        _validateInputs();
+                      }
+                    ),
+                ],)
+              ),
+            ],
+          )
         )
       )
     );
