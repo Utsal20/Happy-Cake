@@ -9,6 +9,9 @@ class OrderInfo extends StatefulWidget {
 
 class _OrderInfoState extends State<OrderInfo> {
   final GlobalKey<FormState> _orderKey = GlobalKey<FormState>();
+  bool _autoValidate = false;
+  
+  
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +23,10 @@ class _OrderInfoState extends State<OrderInfo> {
         onHorizontalDragEnd: (DragEndDetails details) {
           if (details.primaryVelocity == 0)
             return;
-          if (details.primaryVelocity.compareTo(0) == -1) {
-            saveOrderInfo();
-            Navigator.of(context).pushNamed('/b');
-          }
+          if (details.primaryVelocity.compareTo(0) == -1)
+            _validateInputs();
+          else
+            Navigator.of(context).pop();
         },
         child: Container(
             color: Colors.white,
@@ -32,19 +35,23 @@ class _OrderInfoState extends State<OrderInfo> {
               Flexible(
                   child: Form(
                       key: _orderKey,
+                      autovalidate: _autoValidate,
                       child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Flexible(
-                              child: RaisedButton(
-                                child: Icon(Icons.calendar_today),
-                                elevation: 4.0,
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-                                color: Colors.blue[300],
-                                splashColor: Colors.blue[300],
-                                onPressed: _selectDate,
-                              ),
-                            ),
+                              child: InkWell(
+                                onTap: (){
+                                  _selectDate();
+                                },
+                                child: IgnorePointer(
+                              child: TextFormField(
+                                initialValue: 'Click Here to Select Date',
+                                decoration: InputDecoration(
+                                  labelText: 'Order Date:',
+                                ),
+                                ),
+                            ),),),
                             Flexible(
                               child: TextFormField(
                                   initialValue: DataStore.feeds,
@@ -55,7 +62,9 @@ class _OrderInfoState extends State<OrderInfo> {
                                   keyboardType: TextInputType.number,
                                   onSaved: (String value) {
                                     DataStore.feeds = value;
-                                  }),
+                                  },
+                                  validator: _peopleValidator,
+                                  ),
                             ),
                             Row(
                               //Created a row to put text next to the drop down menu, text align is trash
@@ -66,7 +75,7 @@ class _OrderInfoState extends State<OrderInfo> {
                                   style: Theme.of(context).textTheme.subhead,
                                 ),
                                 Flexible(
-                                  child: DropdownButton<String>(
+                                  child: DropdownButtonFormField<String>(
                                     value: DataStore.function,
                                     onChanged: (String newValue) {
                                       setState(() {
@@ -74,6 +83,7 @@ class _OrderInfoState extends State<OrderInfo> {
                                       });
                                     },
                                     items: <String>[
+                                      'Select',
                                       'Birthday',
                                       'Kids',
                                       'Wedding'
@@ -84,9 +94,7 @@ class _OrderInfoState extends State<OrderInfo> {
                                         child: Text(value),
                                       );
                                     }).toList(),
-
-                                    isExpanded: true, //Expands it across screen
-                                    elevation: 12, //depth of drop down menu
+                                    validator: _dropdownValidator,
                                   ),
                                 ),
                               ],
@@ -101,7 +109,9 @@ class _OrderInfoState extends State<OrderInfo> {
                                   keyboardType: TextInputType.text,
                                   onSaved: (String value) {
                                     DataStore.flavor = value;
-                                  }),
+                                  },
+                                  validator: _flavorValidator,
+                                  ),
                             ),
                             Flexible(
                                 child: TextFormField(
@@ -115,7 +125,9 @@ class _OrderInfoState extends State<OrderInfo> {
                                     maxLines: null,
                                     onSaved: (String value) {
                                       DataStore.decorationNotes = value;
-                                    }))
+                                    },
+                                    validator: _descriptionValidator,
+                                    ))
                           ]))),
 
               Container( 
@@ -127,9 +139,9 @@ class _OrderInfoState extends State<OrderInfo> {
                   color: Colors.green[300],
                   splashColor: Theme.of(context).accentColor,
                   onPressed: () {
-                    saveOrderInfo();
-                    Navigator.of(context).pushNamed('/b');
-                  }
+                    _validateInputs();
+                  },
+
               ),),
             ]
             )
@@ -138,20 +150,66 @@ class _OrderInfoState extends State<OrderInfo> {
     );
   }
 
-  _selectDate() async {
-    DateTime picked = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now().add(Duration(days: 7)),
-      firstDate: DateTime.now(),
-      lastDate: DateTime.now().add(Duration(days: 365)),
-    );
-    if (picked != null) {
-      print('Date picked: ${picked.toString()}');
-      setState(() { DataStore.date = picked.toString(); });
+  bool _validateInputs() {
+    if (_orderKey.currentState.validate()) {
+      _orderKey.currentState.save();
+      Navigator.of(context).pushNamed('/b');
+      return true;
+    } else {
+      setState((){
+        _autoValidate = true;
+      });
+      return false;
     }
   }
 
-  void saveOrderInfo() {
-    _orderKey.currentState.save();
+  DateTime selectedDate = DateTime.now().add(Duration(days: 7));
+
+  _selectDate() async {
+    DateTime picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime.now(),
+      lastDate: DateTime.now().add(Duration(days: 365)),
+    );
+    if (picked != null && picked != selectedDate) {
+      print('Date picked: ${picked.toString()}');
+      setState(() {_printLatestValue(); selectedDate = picked; DataStore.date = picked.toString(); });
+    }
+  }
+
+  String _peopleValidator (String value) {
+    if(value.isEmpty) {
+      return 'How many people will this cake feed';
+    }
+    return null;
+  }
+
+  String _flavorValidator (String value) {
+    if(value.isEmpty) {
+      return 'Please enter a flavor';
+    }
+    return null;
+  }
+
+  String _descriptionValidator (String value) {
+    if(value.isEmpty) {
+      return 'Please enter a description of the cake';
+    }
+    return null;
+  }
+
+  String _dropdownValidator (String value) {
+    if(value == 'Select') {
+      return 'Please enter a function';
+    }
+    return null;
+  }
+  String _printLatestValue() {
+    if(DataStore.date.isEmpty){
+      return 'Tap Here to Select a Date';
+    } else {
+      return DataStore.date;
+    }
   }
 }
