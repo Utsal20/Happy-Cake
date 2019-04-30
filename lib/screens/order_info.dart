@@ -49,6 +49,7 @@ class _OrderInfoState extends State<OrderInfo> {
                                 initialValue: 'Click Here to Select Date',
                                 decoration: InputDecoration(
                                   labelText: 'Order Date:',
+                                  contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 20),
                                 ),
                                 ),
                             ),),),
@@ -58,6 +59,7 @@ class _OrderInfoState extends State<OrderInfo> {
                                   decoration: InputDecoration(
                                     hintText: 'Ex: 200',
                                     labelText: 'How many people:',
+                                    contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 20),
                                   ),
                                   keyboardType: TextInputType.number,
                                   onSaved: (String value) {
@@ -105,6 +107,7 @@ class _OrderInfoState extends State<OrderInfo> {
                                   decoration: InputDecoration(
                                     hintText: 'Ex: Chocolate/Rasberry',
                                     labelText: 'Flavor Combination:',
+                                    contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 20),
                                   ),
                                   keyboardType: TextInputType.text,
                                   onSaved: (String value) {
@@ -120,6 +123,7 @@ class _OrderInfoState extends State<OrderInfo> {
                                       hintText:
                                           'Ex: I want the cake to be yellow flowers',
                                       labelText: 'Decoration Notes:',
+                                      contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 20),
                                     ),
                                     keyboardType: TextInputType.text,
                                     maxLines: null,
@@ -174,7 +178,8 @@ class _OrderInfoState extends State<OrderInfo> {
     );
     if (picked != null && picked != selectedDate) {
       print('Date picked: ${picked.toString()}');
-      setState(() {_printLatestValue(); selectedDate = picked; DataStore.date = picked.toString(); });
+      selectedDate = picked;
+      setState(() {DataStore.date = picked.toString(); });
     }
   }
 
@@ -204,12 +209,5 @@ class _OrderInfoState extends State<OrderInfo> {
       return 'Please enter a function';
     }
     return null;
-  }
-  String _printLatestValue() {
-    if(DataStore.date.isEmpty){
-      return 'Tap Here to Select a Date';
-    } else {
-      return DataStore.date;
-    }
   }
 }
