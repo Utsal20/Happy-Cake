@@ -126,7 +126,7 @@ class _ConfirmationState extends State<Confirmation> {
     Flavor combination: ${DataStore.flavor}<br/>
     Decoration notes: ${DataStore.decorationNotes}<br/>
     ''';
-    Emailer.email(DataStore.name, DataStore.email, emailText).then((dynamic) {
+    Emailer.email(DataStore.name, DataStore.email, emailText, DataStore.attachment).then((dynamic) {
       setState(() {
         submitted = true;
       });

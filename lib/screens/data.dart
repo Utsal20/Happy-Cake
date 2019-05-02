@@ -4,6 +4,7 @@ class DataStore{
   static String function = 'Select'; //What occasion
   static String flavor = '';
   static String decorationNotes = '';
+  static String attachment = '';
 
   static String name = '';
   static String email = '';

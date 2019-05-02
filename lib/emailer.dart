@@ -1,9 +1,10 @@
 // https://pub.dartlang.org/packages/mailer#-readme-tab-
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server/gmail.dart';
+import 'dart:io';
 
 class Emailer {
-  static email(String clientName, String clientEmail, String text) async {
+  static email(String clientName, String clientEmail, String text, String attachment) async {
     //Credentials
     String username = 'happycaketest@gmail.com';
     String password = 'P!rates88';
@@ -17,7 +18,8 @@ class Emailer {
       ..recipients.add('happycaketest@gmail.com')
       ..ccRecipients.add(clientEmail)
       ..subject = 'Order Inquiry ${dateTime.month}-${dateTime.day}-${dateTime.year}'
-      ..html = text;
+      ..html = text
+      ..attachments.add(FileAttachment(File(attachment)));
     
     final sendReports = await send(message, smtpServer); // Send the email
 
