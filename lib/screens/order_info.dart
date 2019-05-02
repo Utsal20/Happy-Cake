@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:core';
 import 'data.dart';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 
 class OrderInfo extends StatefulWidget {
   @override
@@ -10,8 +12,7 @@ class OrderInfo extends StatefulWidget {
 class _OrderInfoState extends State<OrderInfo> {
   final GlobalKey<FormState> _orderKey = GlobalKey<FormState>();
   bool _autoValidate = false;
-  
-  
+  File galleryFile;
 
   @override
   Widget build(BuildContext context) {
@@ -131,7 +132,22 @@ class _OrderInfoState extends State<OrderInfo> {
                                       DataStore.decorationNotes = value;
                                     },
                                     validator: _descriptionValidator,
-                                    ))
+                                    )),
+                            Flexible(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  RaisedButton(
+                                    child: Text('Choose Sample Cakes'),
+                                    onPressed: imageSelectorGallery,
+                                  ),
+                                  Icon(
+                                    Icons.check_circle,
+                                    color: (galleryFile!= null) ? Colors.green[300] : Colors.grey,
+                                    ),
+                                ],
+                              ), 
+                              ),
                           ]))),
 
               Container( 
@@ -168,6 +184,21 @@ class _OrderInfoState extends State<OrderInfo> {
   }
 
   DateTime selectedDate = DateTime.now().add(Duration(days: 7));
+
+  imageSelectorGallery() async {
+    galleryFile = await ImagePicker.pickImage(source: ImageSource.gallery,);
+    if (galleryFile != null){
+      var systemTempDir = Directory("/data/user/0/com.example.happycake/cache/");
+        systemTempDir.list(followLinks: false)
+        .listen((FileSystemEntity entity) {
+          if (entity.path.contains(".jpg"))
+            setState(() {
+              DataStore.attachment = entity.path;
+              return;
+            });
+      });
+    }
+  }
 
   _selectDate() async {
     DateTime picked = await showDatePicker(
