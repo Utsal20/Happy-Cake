@@ -46,10 +46,9 @@ class _OrderInfoState extends State<OrderInfo> {
                                 },
                                 child: IgnorePointer(
                               child: TextFormField(
-                                initialValue: 'Click Here to Select Date',
+                                initialValue: 'Click Here for Date',
                                 decoration: InputDecoration(
-                                  labelText: 'Order Date:',
-                                  contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 20),
+                                  labelText: 'Date Needed:',
                                 ),
                                 ),
                             ),),),
@@ -59,7 +58,6 @@ class _OrderInfoState extends State<OrderInfo> {
                                   decoration: InputDecoration(
                                     hintText: 'Ex: 200',
                                     labelText: 'How many people:',
-                                    contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 20),
                                   ),
                                   keyboardType: TextInputType.number,
                                   onSaved: (String value) {
@@ -72,7 +70,7 @@ class _OrderInfoState extends State<OrderInfo> {
                               //Created a row to put text next to the drop down menu, text align is trash
                               children: <Widget>[
                                 Text(
-                                  'Function:   ',
+                                  'What\'s the occasion?   ',
                                   textAlign: TextAlign.left,
                                   style: Theme.of(context).textTheme.subhead,
                                 ),
@@ -88,7 +86,10 @@ class _OrderInfoState extends State<OrderInfo> {
                                       'Select',
                                       'Birthday',
                                       'Kids',
-                                      'Wedding'
+                                      'Wedding',
+                                      'Graduation',
+                                      'Baby Shower',
+                                      'Other',
                                     ].map<DropdownMenuItem<String>>(
                                         (String value) {
                                       return DropdownMenuItem<String>(
@@ -102,28 +103,12 @@ class _OrderInfoState extends State<OrderInfo> {
                               ],
                             ),
                             Flexible(
-                              child: TextFormField(
-                                  initialValue: DataStore.flavor,
-                                  decoration: InputDecoration(
-                                    hintText: 'Ex: Chocolate/Rasberry',
-                                    labelText: 'Flavor Combination:',
-                                    contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 20),
-                                  ),
-                                  keyboardType: TextInputType.text,
-                                  onSaved: (String value) {
-                                    DataStore.flavor = value;
-                                  },
-                                  validator: _flavorValidator,
-                                  ),
-                            ),
-                            Flexible(
                                 child: TextFormField(
                                     initialValue: DataStore.decorationNotes,
                                     decoration: InputDecoration(
                                       hintText:
                                           'Ex: I want the cake to be yellow flowers',
                                       labelText: 'Decoration Notes:',
-                                      contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 20),
                                     ),
                                     keyboardType: TextInputType.text,
                                     maxLines: null,
