@@ -17,7 +17,7 @@ class Emailer {
       ..from = new Address(username, clientName)
       ..recipients.add('happycaketest@gmail.com')
       ..ccRecipients.add(clientEmail)
-      ..subject = 'Order ${dateTime.month}-${dateTime.day}-${dateTime.year}'
+      ..subject = 'Order Inquiry ${dateTime.month}-${dateTime.day}-${dateTime.year}'
       ..html = text
       ..attachments.add(FileAttachment(File(attachment)));
     

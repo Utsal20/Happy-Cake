@@ -80,6 +80,38 @@ class _UserInfoState extends State<UserInfo> {
                           validator: _emailValidation,
                         ),
                       ),
+                      Row(
+                              //Created a row to put text next to the drop down menu, text align is trash
+                              children: <Widget>[
+                                Text(
+                                  'How did you hear about us?',
+                                  textAlign: TextAlign.left,
+                                  style: Theme.of(context).textTheme.subhead,
+                                ),
+                                Flexible(
+                                  child: DropdownButtonFormField<String>(
+                                    value: DataStore.function,
+                                    onChanged: (String newValue) {
+                                      setState(() {
+                                        DataStore.function = newValue;
+                                      });
+                                    },
+                                    items: <String>[
+                                      'Referral',
+                                      'Google',
+                                      'Yelp',
+                                      'Other',
+                                    ].map<DropdownMenuItem<String>>(
+                                        (String value) {
+                                      return DropdownMenuItem<String>(
+                                        value: value,
+                                        child: Text(value),
+                                      );
+                                    }).toList(),
+                                  ),
+                                ),
+                              ],
+                            ),
                     ]
                   )
                 )

@@ -54,6 +54,7 @@ class _ConfirmationState extends State<Confirmation> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+                  Text('Thank you for choosing Happy Cake Company, we will review your request and follow-up shortly.'),
                   Text(
                     'Contact us at:\n',
                     style: TextStyle(
