@@ -1,8 +1,8 @@
 class DataStore{
   static String date = '';
   static String feeds = ''; //Total people it feeds
-  static String function = 'Select'; //What occasion
-  static String flavor = '';
+  static String occasion = 'Select';
+  static String otherOccasion = '';
   static String decorationNotes = '';
   static String attachment = '';
 
@@ -10,4 +10,5 @@ class DataStore{
   static String email = '';
   static String phone = '';
   static String referral = 'Referral';
+  static String otherReferral = '';
 }

@@ -11,8 +11,22 @@ class OrderInfo extends StatefulWidget {
 
 class _OrderInfoState extends State<OrderInfo> {
   final GlobalKey<FormState> _orderKey = GlobalKey<FormState>();
+  TextEditingController _textController;
   bool _autoValidate = false;
+  bool _other = false;
   File galleryFile;
+
+  @override
+  void initState() {
+    _textController = new TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose(){
+    _textController?.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +40,6 @@ class _OrderInfoState extends State<OrderInfo> {
             return;
           if (details.primaryVelocity.compareTo(0) == -1)
             _validateInputs();
-          else
-            Navigator.of(context).pop();
         },
         child: Container(
             color: Colors.white,
@@ -47,10 +59,11 @@ class _OrderInfoState extends State<OrderInfo> {
                                 },
                                 child: IgnorePointer(
                               child: TextFormField(
-                                initialValue: 'Click Here for Date',
                                 decoration: InputDecoration(
                                   labelText: 'Date Needed:',
                                 ),
+                                controller: _textController,
+                                validator: _dateValidator,
                                 ),
                             ),),),
                             Flexible(
@@ -77,11 +90,16 @@ class _OrderInfoState extends State<OrderInfo> {
                                 ),
                                 Flexible(
                                   child: DropdownButtonFormField<String>(
-                                    value: DataStore.function,
+                                    value: DataStore.occasion,
                                     onChanged: (String newValue) {
                                       setState(() {
-                                        DataStore.function = newValue;
+                                        DataStore.occasion = newValue;
                                       });
+                                      if(DataStore.occasion == 'Other'){
+                                        _other = true;
+                                      } else {
+                                        _other = false;
+                                      }
                                     },
                                     items: <String>[
                                       'Select',
@@ -103,6 +121,19 @@ class _OrderInfoState extends State<OrderInfo> {
                                 ),
                               ],
                             ),
+                            Flexible(
+                              child: Visibility(
+                                visible: _other,
+                                child: TextFormField(
+                                  decoration: InputDecoration(
+                                    hintText: 'Please enter the occasion',
+                                    labelText: 'Other Occasion',
+                                  ),
+                                  onSaved: (String value) {
+                                    DataStore.otherOccasion = value;
+                                  },
+                                  validator: _otherValidator,
+                                ))),
                             Flexible(
                                 child: TextFormField(
                                     initialValue: DataStore.decorationNotes,
@@ -168,8 +199,6 @@ class _OrderInfoState extends State<OrderInfo> {
     }
   }
 
-  DateTime selectedDate = DateTime.now().add(Duration(days: 7));
-
   imageSelectorGallery() async {
     galleryFile = await ImagePicker.pickImage(source: ImageSource.gallery,);
     if (galleryFile != null){
@@ -185,6 +214,8 @@ class _OrderInfoState extends State<OrderInfo> {
     }
   }
 
+  DateTime selectedDate = DateTime.now().add(Duration(days: 7));
+
   _selectDate() async {
     DateTime picked = await showDatePicker(
       context: context,
@@ -195,20 +226,21 @@ class _OrderInfoState extends State<OrderInfo> {
     if (picked != null && picked != selectedDate) {
       print('Date picked: ${picked.toString()}');
       selectedDate = picked;
+      _textController.text = selectedDate.toString().substring(0,11); 
       setState(() {DataStore.date = picked.toString(); });
     }
+  }
+
+  String _dateValidator (String value) {
+    if(value.isEmpty) {
+      return 'Please enter the date needed';
+    }
+    return null;
   }
 
   String _peopleValidator (String value) {
     if(value.isEmpty) {
       return 'How many people will this cake feed';
-    }
-    return null;
-  }
-
-  String _flavorValidator (String value) {
-    if(value.isEmpty) {
-      return 'Please enter a flavor';
     }
     return null;
   }
@@ -223,6 +255,12 @@ class _OrderInfoState extends State<OrderInfo> {
   String _dropdownValidator (String value) {
     if(value == 'Select') {
       return 'Please enter a function';
+    }
+    return null;
+  }
+  String _otherValidator (String value) {
+    if(value.isEmpty && DataStore.occasion == 'Other'){
+      return 'Please specify the occasion';
     }
     return null;
   }

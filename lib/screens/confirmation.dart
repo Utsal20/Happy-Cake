@@ -39,13 +39,10 @@ class _ConfirmationState extends State<Confirmation> {
                     ),
                   ),
                   Text(
-                    DataStore.flavor,
-                  ),
-                  Text(
                     DataStore.feeds + ' people',
                   ),
                   Text(
-                    DataStore.function,
+                    DataStore.occasion,
                   ),
                   Text(
                     DataStore.date,
@@ -122,8 +119,7 @@ class _ConfirmationState extends State<Confirmation> {
     <b>Order Info</b><br/>
     Date needed: ${DataStore.date}<br/>
     Size: ${DataStore.feeds} people<br/>
-    Function: ${DataStore.function}<br/>
-    Flavor combination: ${DataStore.flavor}<br/>
+    Function: ${DataStore.occasion}<br/>
     Decoration notes: ${DataStore.decorationNotes}<br/>
     ''';
     Emailer.email(DataStore.name, DataStore.email, emailText, DataStore.attachment).then((dynamic) {

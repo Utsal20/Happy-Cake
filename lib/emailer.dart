@@ -7,7 +7,7 @@ class Emailer {
   static email(String clientName, String clientEmail, String text, String attachment) async {
     //Credentials
     String username = 'happycaketest@gmail.com';
-    String password = 'P!rates88';
+    String password = 'NOTTHEPASSWORD';
 
     final smtpServer = gmail(username, password); // Create smpt server
     
