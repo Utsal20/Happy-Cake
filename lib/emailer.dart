@@ -1,23 +1,22 @@
 // https://pub.dartlang.org/packages/mailer#-readme-tab-
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server/gmail.dart';
+import 'secret.dart';
 import 'dart:io';
 
 class Emailer {
   static email(String clientName, String clientEmail, String text, String attachment) async {
-    //Credentials
-    String username = 'happycaketest@gmail.com';
-    String password = 'NOTTHEPASSWORD';
+    //Credentials accessed through secret.dart via Secret class
 
-    final smtpServer = gmail(username, password); // Create smpt server
+    final smtpServer = gmail(Secrets.email, Secrets.password); // Create smpt server
     
     // Create our message.
     final dateTime = new DateTime.now();
     final message = new Message()
-      ..from = new Address(username, clientName)
+      ..from = new Address(Secrets.email, clientName)
       ..recipients.add('happycaketest@gmail.com')
       ..ccRecipients.add(clientEmail)
-      ..subject = 'Order Inquiry ${dateTime.month}-${dateTime.day}-${dateTime.year}'
+      ..subject = 'Order Inquiry ${dateTime.month}-${dateTime.day}-${dateTime.year} $clientName'
       ..html = text
       ..attachments.add(FileAttachment(File(attachment)));
     
