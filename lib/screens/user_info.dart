@@ -25,110 +25,106 @@ class _UserInfoState extends State<UserInfo> {
               else
                 Navigator.of(context).pop();
             },
-            child: Container(
-                color: Colors.white,
-                padding: EdgeInsets.fromLTRB(20, 20, 20, .1),
-                child: Column(
+
+          child: Form(
+            key: _clientKey,
+            autovalidate: _autoValidate,
+
+              child: ListView(
+                  shrinkWrap: true,
+                  padding: const EdgeInsets.all(20.0),
+
+
+
                   children: <Widget>[
-                    Flexible(
-                        child: Form(
-                            key: _clientKey,
-                            autovalidate: _autoValidate,
-                            child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Flexible(
-                                    child: TextFormField(
-                                        initialValue: DataStore.name,
-                                        decoration: InputDecoration(
-                                          hintText: 'John Doe',
-                                          labelText: 'Name',
-                                        ),
-                                        keyboardType: TextInputType.text,
-                                        onSaved: (String value) {
-                                          DataStore.name = value;
-                                        }),
-                                  ),
-                                  Flexible(
-                                    child: TextFormField(
-                                      initialValue: DataStore.phone,
-                                      decoration: InputDecoration(
-                                        hintText: '1234567890',
-                                        labelText: 'Phone',
-                                      ),
-                                      keyboardType: TextInputType.number,
-                                      onSaved: (String value) {
-                                        DataStore.phone = value;
-                                      },
-                                      validator: _phoneValidation,
-                                    ),
-                                  ),
-                                  Flexible(
-                                    child: TextFormField(
-                                      initialValue: DataStore.email,
-                                      decoration: InputDecoration(
-                                        hintText: 'you@example.com',
-                                        labelText: 'Email',
-                                      ),
-                                      keyboardType: TextInputType.emailAddress,
-                                      onSaved: (String value) {
-                                        DataStore.email = value;
-                                      },
-                                      validator: _emailValidation,
-                                    ),
-                                  ),
-                                  Row(
-                                    //Created a row to put text next to the drop down menu, text align is trash
-                                    children: <Widget>[
-                                      Text(
-                                        'How did you hear about us?  ',
-                                        textAlign: TextAlign.left,
-                                        style:
-                                            Theme.of(context).textTheme.subhead,
-                                      ),
-                                      Flexible(
-                                        child: DropdownButtonFormField<String>(
-                                          value: DataStore.referral,
-                                          onChanged: (String newValue) {
-                                            setState(() {
-                                              DataStore.referral = newValue;
-                                            });
-                                            if (DataStore.referral == 'Other') {
-                                              _other = true;
-                                            } else {
-                                              _other = false;
-                                            }
-                                          },
-                                          items: <String>[
-                                            'Referral',
-                                            'Google',
-                                            'Yelp',
-                                            'Other',
-                                          ].map<DropdownMenuItem<String>>(
-                                              (String value) {
-                                            return DropdownMenuItem<String>(
-                                              value: value,
-                                              child: Text(value),
-                                            );
-                                          }).toList(),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Flexible(
-                                      child: Visibility(
-                                          visible: _other,
-                                          child: TextFormField(
-                                            decoration: InputDecoration(
-                                              hintText:
-                                                  'Enter how you heard about us',
-                                              labelText: 'Other Referral',
-                                            ),
-                                            onSaved: (String value) {
-                                              DataStore.otherReferral = value;
-                                            },
-                                          )))
-                                ]))),
+
+                    TextFormField(
+                        initialValue: DataStore.name,
+                        decoration: InputDecoration(
+                          hintText: 'John Doe',
+                          labelText: 'Name',
+                        ),
+                        keyboardType: TextInputType.text,
+                        onSaved: (String value) {
+                          DataStore.name = value;
+                        }),
+
+                    TextFormField(
+                      initialValue: DataStore.phone,
+                      decoration: InputDecoration(
+                        hintText: '1234567890',
+                        labelText: 'Phone',
+                      ),
+                      keyboardType: TextInputType.number,
+                      onSaved: (String value) {
+                        DataStore.phone = value;
+                      },
+                      validator: _phoneValidation,
+                    ),
+
+                    TextFormField(
+                      initialValue: DataStore.email,
+                      decoration: InputDecoration(
+                        hintText: 'you@example.com',
+                        labelText: 'Email',
+                      ),
+                      keyboardType: TextInputType.emailAddress,
+                      onSaved: (String value) {
+                        DataStore.email = value;
+                      },
+                      validator: _emailValidation,
+                    ),
+
+                    Row(
+                      children: <Widget>[
+                        Text(
+                          'How did you hear about us?  ',
+                          textAlign: TextAlign.left,
+                          style:
+                          Theme.of(context).textTheme.subhead,
+                        ),
+                        Flexible(
+                          child: DropdownButtonFormField<String>(
+                            value: DataStore.referral,
+                            onChanged: (String newValue) {
+                              setState(() {
+                                DataStore.referral = newValue;
+                              });
+                              if (DataStore.referral == 'Other') {
+                                _other = true;
+                              } else {
+                                _other = false;
+                              }
+                            },
+                            items: <String>[
+                              'Referral',
+                              'Google',
+                              'Yelp',
+                              'Other',
+                            ].map<DropdownMenuItem<String>>(
+                                    (String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                          ),
+                        ),
+                      ],
+                    ),
+              Visibility(
+                  visible: _other,
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      hintText:
+                      'Enter how you heard about us',
+                      labelText: 'Other Referral',
+                    ),
+                    onSaved: (String value) {
+                      DataStore.otherReferral = value;
+                    },
+                  )),
+
                     Container(
                         padding: EdgeInsets.only(bottom: 40),
                         child: Row(
@@ -155,9 +151,12 @@ class _UserInfoState extends State<UserInfo> {
                                   _validateInputs();
                                 }),
                           ],
-                        )),
+                        ))
+
                   ],
-                ))));
+                  ),
+          )
+            ));
   }
 
   bool _validateInputs() {
