@@ -1,106 +1,142 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
-import 'dart:core';
 
-class CakeExamples extends StatefulWidget {
-  @override
-  _CakeExamplesState createState() => _CakeExamplesState();
+child: Container(
+color: Colors.white,
+padding: EdgeInsets.fromLTRB(20, 20, 20, .1),
+child: Column(children: <Widget>[
+Flexible(
+child: Form(
+key: _orderKey,
+autovalidate: _autoValidate,
+child: Column(
+mainAxisAlignment: MainAxisAlignment.center,
+children: <Widget>[
+Flexible(
+child: InkWell(
+onTap: (){
+_selectDate();
+},
+child: IgnorePointer(
+child: TextFormField(
+decoration: InputDecoration(
+labelText: 'Date Needed:',
+),
+controller: _textController,
+validator: _dateValidator,
+),
+),),),
+Flexible(
+child: TextFormField(
+initialValue: DataStore.feeds,
+decoration: InputDecoration(
+hintText: 'Ex: 200',
+labelText: 'How many people:',
+),
+keyboardType: TextInputType.number,
+onSaved: (String value) {
+DataStore.feeds = value;
+},
+validator: _peopleValidator,
+),
+),
+Row(
+//Created a row to put text next to the drop down menu, text align is trash
+children: <Widget>[
+Text(
+'What\'s the occasion?   ',
+textAlign: TextAlign.left,
+style: Theme.of(context).textTheme.subhead,
+),
+Flexible(
+child: DropdownButtonFormField<String>(
+value: DataStore.occasion,
+onChanged: (String newValue) {
+setState(() {
+DataStore.occasion = newValue;
+});
+if(DataStore.occasion == 'Other'){
+_other = true;
+} else {
+_other = false;
 }
+},
+items: <String>[
+'Select',
+'Birthday',
+'Kids',
+'Wedding',
+'Graduation',
+'Baby Shower',
+'Other',
+].map<DropdownMenuItem<String>>(
+(String value) {
+return DropdownMenuItem<String>(
+value: value,
+child: Text(value),
+);
+}).toList(),
+validator: _dropdownValidator,
+),
+),
+],
+),
+Flexible(
+child: Visibility(
+visible: _other,
+child: TextFormField(
+decoration: InputDecoration(
+hintText: 'Please enter the occasion',
+labelText: 'Other Occasion',
+),
+onSaved: (String value) {
+DataStore.otherOccasion = value;
+},
+validator: _otherValidator,
+))),
+Flexible(
+child: TextFormField(
+initialValue: DataStore.decorationNotes,
+decoration: InputDecoration(
+hintText:
+'Ex: I want the cake to be yellow flowers',
+labelText: 'Decoration Notes:',
+),
+keyboardType: TextInputType.text,
+maxLines: null,
+onSaved: (String value) {
+DataStore.decorationNotes = value;
+},
+validator: _descriptionValidator,
+)),
+Flexible(
+child: Row(
+mainAxisAlignment: MainAxisAlignment.spaceBetween,
+children: <Widget>[
+RaisedButton(
+child: Text('Choose Sample Cakes'),
+onPressed: imageSelectorGallery,
+),
+Icon(
+Icons.check_circle,
+color: (galleryFile!= null) ? Colors.green[300] : Colors.grey,
+),
+],
+),
+),
+]))),
 
-class _CakeExamplesState extends State<CakeExamples>{
+Container(
+padding:EdgeInsets.only(bottom: 40),
+child: RaisedButton(
+child: Icon(Icons.arrow_forward),
+elevation: 4.0,
+shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100.0)),
+color: Colors.green[300],
+splashColor: Theme.of(context).accentColor,
+onPressed: () {
+_validateInputs();
+},
 
-  @override
-  Widget build(BuildContext context) {
-    final title = "Cake Examples";
-
-    return MaterialApp(
-        title: title,
-        home: Scaffold(appBar: AppBar(
-          title: Text(title),
-        ),
-            body: new ListView(
-                shrinkWrap: true,
-                padding: const EdgeInsets.all(20.0),
-                children: List.generate(choices.length, (index) {
-                  return Center(
-                    child: ChoiceCard(choice: choices[index], item: choices[index]),
-                  );
-                }
-                )
-            )
-        )
-    );
-  }
-}
-
-class Choice {
-  const Choice({this.title, this.icon});
-
-  final String title;
-  final IconData icon;
-}
-
-const List<Choice> choices = const <Choice>[
-  const Choice(title: 'Here is a lot of cake information', icon: Icons.cake),
-  const Choice(title: 'Here is a lot of cake information', icon: Icons.cake),
-  const Choice(title: 'Here is a lot of cake information', icon: Icons.cake),
-  const Choice(title: 'Here is a lot of cake information', icon: Icons.cake),
-  const Choice(title: 'Here is a lot of cake information', icon: Icons.cake),
-  const Choice(title: 'Here is a lot of cake information', icon: Icons.cake),
-  const Choice(title: 'Here is a lot of cake information', icon: Icons.cake),
-  const Choice(title: 'Here is a lot of cake information', icon: Icons.cake),
-  const Choice(title: 'Here is a lot of cake information', icon: Icons.cake),
-  const Choice(title: 'Here is a lot of cake information', icon: Icons.cake),
-  const Choice(title: 'Here is a lot of cake information', icon: Icons.cake),
-  const Choice(title: 'Here is a lot of cake information', icon: Icons.cake),
-  const Choice(title: 'Here is a lot of cake information', icon: Icons.cake),
-  const Choice(title: 'Here is a lot of cake information', icon: Icons.cake),
-  const Choice(title: 'Here is a lot of cake information', icon: Icons.cake),
-  const Choice(title: 'Here is a lot of cake information', icon: Icons.cake),
-  const Choice(title: 'Here is a lot of cake information', icon: Icons.cake),
-  const Choice(title: 'Here is a lot of cake information', icon: Icons.cake),
-  const Choice(title: 'Here is a lot of cake information', icon: Icons.cake),
-  const Choice(title: 'Here is a lot of cake information', icon: Icons.cake),
-  const Choice(title: 'Here is a lot of cake information', icon: Icons.cake),
-  const Choice(title: 'Here is a lot of cake information', icon: Icons.cake),
-];
-
-class ChoiceCard extends StatelessWidget {
-  const ChoiceCard(
-      {Key key, this.choice, this.onTap, @required this.item, this.selected: false}
-      ) : super(key: key);
-
-  final Choice choice;
-  final VoidCallback onTap;
-  final Choice item;
-  final bool selected;
-
-
-
-  @override
-  Widget build(BuildContext context) {
-    TextStyle textStyle = Theme.of(context).textTheme.display1;
-    if (selected)
-      textStyle = textStyle.copyWith(color: Colors.lightGreenAccent[400]);
-    return Card(
-        color: Colors.white,
-        child: Row(
-          children: <Widget>[
-            new Container(
-                padding: const EdgeInsets.all(8.0),
-                alignment: Alignment.topLeft,
-                child: Icon(choice.icon, size:80.0, color: textStyle.color,)),
-            new Expanded(
-                child: new Container(
-                  padding: const EdgeInsets.all(10.0),
-                  alignment: Alignment.topLeft,
-                  child:
-                  Text(choice.title, style: null, textAlign: TextAlign.left, maxLines: 5,),
-                )
-            ),
-          ],
-          crossAxisAlignment: CrossAxisAlignment.start,
-        )
-    );
-  }
-}
+),),
+]
+)
+)

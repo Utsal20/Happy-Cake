@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:happy_cake/screens/order_info.dart';
 import 'package:happy_cake/screens/user_info.dart';
 import 'package:happy_cake/screens/confirmation.dart';
-import 'package:happy_cake/screens/cake_examples.dart';
+
 
 class HappyCakeApp extends StatelessWidget {
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class HappyCakeApp extends StatelessWidget {
         '/a': (BuildContext context) => OrderInfo(),
         '/b': (BuildContext context) => UserInfo(),
         '/c': (BuildContext context) => Confirmation(),
-        '/d': (BuildContext context) => CakeExamples(),
+
       }
     );
   }
