@@ -220,13 +220,13 @@ class _OrderInfoState extends State<OrderInfo> {
     }
   }
 
-  DateTime selectedDate = DateTime.now().add(Duration(days: 7));
+  DateTime selectedDate = DateTime.now().add(Duration(days: 8));
 
   _selectDate() async {
     DateTime picked = await showDatePicker(
       context: context,
       initialDate: selectedDate,
-      firstDate: DateTime.now(),
+      firstDate: DateTime.now().add(Duration(days: 7)),
       lastDate: DateTime.now().add(Duration(days: 365)),
     );
     if (picked != null && picked != selectedDate) {

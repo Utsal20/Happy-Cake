@@ -48,7 +48,9 @@ class _UserInfoState extends State<UserInfo> {
                         keyboardType: TextInputType.text,
                         onSaved: (String value) {
                           DataStore.name = value;
-                        }),
+                        },
+                        validator: _nameValidation,
+                        ),
 
                     TextFormField(
                       initialValue: DataStore.phone,
@@ -171,6 +173,13 @@ class _UserInfoState extends State<UserInfo> {
       });
       return false;
     }
+  }
+
+  String _nameValidation (String value) {
+    if(value.isEmpty) {
+      return 'Please enter a name';
+    }
+    return null;
   }
 
   String _emailValidation(String value) {
