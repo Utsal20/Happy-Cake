@@ -9,6 +9,6 @@ class DataStore{
   static String name = '';
   static String email = '';
   static String phone = '';
-  static String referral = 'Referral';
+  static String referral = 'Select';
   static String otherReferral = '';
 }
