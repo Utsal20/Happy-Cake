@@ -68,7 +68,8 @@ class _UserInfoState extends State<UserInfo> {
                           DataStore.phone = value;
                         },
                         validator: _phoneValidation,
-                        ),
+                      ),
+                    ),
 
                     Container(
                       padding: EdgeInsets.only(bottom: 20.0),
