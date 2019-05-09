@@ -21,8 +21,9 @@ class _UserInfoState extends State<UserInfo> {
             onHorizontalDragEnd: (DragEndDetails details) {
               if (details.primaryVelocity == 0) return;
               if (details.primaryVelocity.compareTo(0) == -1)
-                _validateInputs();
-              else
+                if(_validateInputs())
+                Navigator.of(context).pushNamed('/confirmation');
+              if (details.primaryVelocity.compareTo(0) != -1)
                 Navigator.of(context).pop();
             },
 
@@ -148,7 +149,8 @@ class _UserInfoState extends State<UserInfo> {
                                 color: Colors.green[300],
                                 splashColor: Theme.of(context).accentColor,
                                 onPressed: () {
-                                  _validateInputs();
+                                  if(_validateInputs())
+                                    Navigator.of(context).pushNamed('/confirmation');
                                 }),
                           ],
                         ))
@@ -162,7 +164,6 @@ class _UserInfoState extends State<UserInfo> {
   bool _validateInputs() {
     if (_clientKey.currentState.validate()) {
       _clientKey.currentState.save();
-      Navigator.of(context).pushNamed('/c');
       return true;
     } else {
       setState(() {
