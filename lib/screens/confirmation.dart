@@ -14,7 +14,7 @@ class _ConfirmationState extends State<Confirmation> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Order Confirmation'),
+          title: Text('Order Inquiry Confirmation'),
         ),
         body: GestureDetector(
         onHorizontalDragEnd: (DragEndDetails details) {
@@ -25,87 +25,93 @@ class _ConfirmationState extends State<Confirmation> {
         },
         child: Container(
           color: Colors.white,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    'Your Order:                                    \n',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
+            child: ListView(
+                  shrinkWrap: true,
+                  padding: const EdgeInsets.all(20.0),
+                  
+              children: <Widget>[
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    Container(padding: const EdgeInsets.only(bottom: 30),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+                          Text(
+                            'Your Order:\n',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
+                          Text(
+                            DataStore.date.substring(0,10),
+                          ),
+                          Text(
+                            DataStore.feeds + ' people',
+                          ),
+                          Text(
+                            (DataStore.occasion == 'Other') ? DataStore.otherOccasion : DataStore.occasion,
+                          ),
+                          Text(
+                            DataStore.decorationNotes,
+                          ),
+                      ],),
                     ),
-                  ),
-                  Text(
-                    DataStore.feeds + ' people',
-                  ),
-                  Text(
-                    DataStore.occasion,
-                  ),
-                  Text(
-                    DataStore.date,
-                  ),
-              ],),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text('Thank you for choosing Happy Cake Company, we will review your request and follow-up shortly.'),
-                  Text(
-                    'Contact us at:\n',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    )
-                  ),
-                  Text(
-                    '1312 N Mullan Rd.\nSpokane Valley, WA 99206\nTues-Sat 9-5pm\n509-924-8455',
-                  ),
-                  Text(
-                    'Please call us with any additional info.',
-                  ),
-              ],),
-              submitted
-                  ? Text(
-                      'Your order has been sent!',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).accentColor,
-                      ),
-                    )
-                  : ButtonTheme(
-                    minWidth: 150,
-                    child: RaisedButton(
-                      child: Text(
-                        'Submit',
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      elevation: 4.0,
-                      shape: RoundedRectangleBorder(
-                         borderRadius: BorderRadius.circular(100.0)),
-                      color: Colors.blue[300],
-                      splashColor: Theme.of(context).accentColor,
-                      onPressed: sendEmail,
+                    Container(padding: const EdgeInsets.only(bottom: 50),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text('Thank you for choosing Happy Cake Co!\nWe will review your request and follow-up shortly.'),
+                      ],),
                     ),
+                    Container(padding: const EdgeInsets.only(bottom: 50),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+                          Text(
+                            'Contact us at:\n',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            )
+                          ),
+                          Text(
+                            '1312 N Mullan Rd.\nSpokane Valley, WA 99206\nTues-Sat 9-5pm\n509-924-8455',
+                          ),
+                          Text(
+                            'Please call us with any additional info.',
+                          ),
+                      ],),
+                    ),
+                    submitted
+                        ? Text(
+                            'Your order has been sent!',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).accentColor,
+                            ),
+                          )
+                        : ButtonTheme(
+                          minWidth: 150,
+                          child: RaisedButton(
+                            child: Text(
+                              'Submit',
+                              style: TextStyle(fontSize: 20),
+                            ),
+                            elevation: 4.0,
+                            shape: RoundedRectangleBorder(
+                               borderRadius: BorderRadius.circular(100.0)),
+                            color: Colors.green[300],
+                            splashColor: Theme.of(context).accentColor,
+                            onPressed: sendEmail,
+                          ),
+                        ),
+                    ],
                   ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  RaisedButton(
-                    child: Icon(Icons.arrow_back),
-                    elevation: 4.0,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100.0)),
-                    color: Colors.green[300],
-                    splashColor: Theme.of(context).accentColor,
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    }
-                  ),
-                ],)
               ],
             ),
-          )
+          ),
         ));
   }
 

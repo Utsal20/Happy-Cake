@@ -39,111 +39,117 @@ class _UserInfoState extends State<UserInfo> {
 
                   children: <Widget>[
 
-                    TextFormField(
-                        initialValue: DataStore.name,
-                        decoration: InputDecoration(
-                          hintText: 'John Doe',
-                          labelText: 'Name',
-                        ),
-                        keyboardType: TextInputType.text,
-                        onSaved: (String value) {
-                          DataStore.name = value;
-                        },
-                        validator: _nameValidation,
-                        ),
+                    Container(
+                      padding: EdgeInsets.only(bottom: 20.0),
 
-                    TextFormField(
-                      initialValue: DataStore.phone,
-                      decoration: InputDecoration(
-                        hintText: '1234567890',
-                        labelText: 'Phone',
-                      ),
-                      keyboardType: TextInputType.number,
-                      onSaved: (String value) {
-                        DataStore.phone = value;
-                      },
-                      validator: _phoneValidation,
-                    ),
-
-                    TextFormField(
-                      initialValue: DataStore.email,
-                      decoration: InputDecoration(
-                        hintText: 'you@example.com',
-                        labelText: 'Email',
-                      ),
-                      keyboardType: TextInputType.emailAddress,
-                      onSaved: (String value) {
-                        DataStore.email = value;
-                      },
-                      validator: _emailValidation,
-                    ),
-
-                    Row(
-                      children: <Widget>[
-                        Text(
-                          'How did you hear about us?  ',
-                          textAlign: TextAlign.left,
-                          style:
-                          Theme.of(context).textTheme.subhead,
-                        ),
-                        Flexible(
-                          child: DropdownButtonFormField<String>(
-                            value: DataStore.referral,
-                            onChanged: (String newValue) {
-                              setState(() {
-                                DataStore.referral = newValue;
-                              });
-                              if (DataStore.referral == 'Other') {
-                                _other = true;
-                              } else {
-                                _other = false;
-                              }
-                            },
-                            items: <String>[
-                              'Referral',
-                              'Google',
-                              'Yelp',
-                              'Other',
-                            ].map<DropdownMenuItem<String>>(
-                                    (String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Text(value),
-                                  );
-                                }).toList(),
+                      child: TextFormField(
+                          initialValue: DataStore.name,
+                          decoration: InputDecoration(
+                            hintText: 'John Doe',
+                            labelText: 'Name',
                           ),
-                        ),
-                      ],
+                          keyboardType: TextInputType.text,
+                          onSaved: (String value) {
+                            DataStore.name = value;
+                          }),
                     ),
-              Visibility(
-                  visible: _other,
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      hintText:
-                      'Enter how you heard about us',
-                      labelText: 'Other Referral',
-                    ),
-                    onSaved: (String value) {
-                      DataStore.otherReferral = value;
-                    },
-                  )),
 
                     Container(
-                        padding: EdgeInsets.only(bottom: 40),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            RaisedButton(
-                                child: Icon(Icons.arrow_back),
-                                elevation: 4.0,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(100.0)),
-                                color: Colors.green[300],
-                                splashColor: Theme.of(context).accentColor,
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                }),
-                            RaisedButton(
+                      padding: EdgeInsets.only(bottom: 20.0),
+
+                      child: TextFormField(
+                        initialValue: DataStore.phone,
+                        decoration: InputDecoration(
+                          hintText: '1234567890',
+                          labelText: 'Phone',
+                        ),
+                        keyboardType: TextInputType.number,
+                        onSaved: (String value) {
+                          DataStore.phone = value;
+                        },
+                        validator: _phoneValidation,
+                      ),
+                    ),
+
+                    Container(
+                      padding: EdgeInsets.only(bottom: 20.0),
+
+                      child: TextFormField(
+                        initialValue: DataStore.email,
+                        decoration: InputDecoration(
+                          hintText: 'you@example.com',
+                          labelText: 'Email',
+                        ),
+                        keyboardType: TextInputType.emailAddress,
+                        onSaved: (String value) {
+                          DataStore.email = value;
+                        },
+                        validator: _emailValidation,
+                      ),
+                    ),
+
+                    Container(
+                      padding: EdgeInsets.only(bottom: 15.0),
+                      child: Row(
+                        children: <Widget>[
+                          Text(
+                            'How did you hear about us?  ',
+                            textAlign: TextAlign.left,
+                            style:
+                            Theme.of(context).textTheme.subhead,
+                          ),
+                          Flexible(
+                            child: DropdownButtonFormField<String>(
+                              value: DataStore.referral,
+                              onChanged: (String newValue) {
+                                setState(() {
+                                  DataStore.referral = newValue;
+                                });
+                                if (DataStore.referral == 'Other') {
+                                  _other = true;
+                                } else {
+                                  _other = false;
+                                }
+                              },
+                              items: <String>[
+                                'Select',
+                                'Referral',
+                                'Google',
+                                'Yelp',
+                                'Other',
+                              ].map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value),
+                                    );
+                                  }).toList(),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+              Container(
+                padding: (_other == true) ? EdgeInsets.only(bottom: 20.0) : EdgeInsets.only(bottom: 0.0),
+
+                child: Visibility(
+                    visible: _other,
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        hintText:
+                        'Enter how you heard about us',
+                        labelText: 'Other Referral',
+                      ),
+                      onSaved: (String value) {
+                        DataStore.otherReferral = value;
+                      },
+                    )),
+              ),
+
+                    Container(
+                        padding: EdgeInsets.fromLTRB(50,0,50,40),
+
+                            child: RaisedButton(
                                 child: Icon(Icons.arrow_forward),
                                 elevation: 4.0,
                                 shape: RoundedRectangleBorder(
@@ -154,8 +160,7 @@ class _UserInfoState extends State<UserInfo> {
                                   if(_validateInputs())
                                     Navigator.of(context).pushNamed('/confirmation');
                                 }),
-                          ],
-                        ))
+                        )
 
                   ],
                   ),
