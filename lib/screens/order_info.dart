@@ -40,7 +40,10 @@ class _OrderInfoState extends State<OrderInfo> {
           if (details.primaryVelocity == 0)
             return;
           if (details.primaryVelocity.compareTo(0) == -1)
-            _validateInputs();
+            if(_validateInputs())
+              Navigator.of(context).pushNamed('/clientInfo');
+          if (details.primaryVelocity.compareTo(0) != -1)
+            Navigator.of(context).pop();
         },
 
         child: Form(
@@ -203,7 +206,8 @@ class _OrderInfoState extends State<OrderInfo> {
                   color: Colors.green[300],
                   splashColor: Theme.of(context).accentColor,
                   onPressed: () {
-                    _validateInputs();
+                    if(_validateInputs())
+                      Navigator.of(context).pushNamed('/clientInfo');
                   },
 
                 ),),
@@ -222,7 +226,6 @@ class _OrderInfoState extends State<OrderInfo> {
   bool _validateInputs() {
     if (_orderKey.currentState.validate()) {
       _orderKey.currentState.save();
-      Navigator.of(context).pushNamed('/b');
       return true;
     } else {
       setState((){
@@ -247,13 +250,13 @@ class _OrderInfoState extends State<OrderInfo> {
     }
   }
 
-  DateTime selectedDate = DateTime.now().add(Duration(days: 7));
+  DateTime selectedDate = DateTime.now().add(Duration(days: 8));
 
   _selectDate() async {
     DateTime picked = await showDatePicker(
       context: context,
       initialDate: selectedDate,
-      firstDate: DateTime.now(),
+      firstDate: DateTime.now().add(Duration(days: 7)),
       lastDate: DateTime.now().add(Duration(days: 365)),
     );
     if (picked != null && picked != selectedDate) {
