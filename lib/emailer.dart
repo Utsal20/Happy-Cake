@@ -9,7 +9,7 @@ class Emailer {
     //Credentials accessed through secret.dart via Secret class
 
     final smtpServer = gmail(Secrets.email, Secrets.password); // Create smpt server
-    
+    print(Secrets.email);
     // Create our message.
     final dateTime = new DateTime.now();
     final message = new Message()

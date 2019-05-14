@@ -25,7 +25,7 @@ class _InquiryPageState extends State<InquiryPage> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
                 Text(
-                  'Welcome to the Happy Cake Company App.\n\nHere, you will be able to submit and order inquiry once you have given us information about the cake you would like and information about how we can contact you.\n\nOnce the form is completed you should receive an email confirming that inquiry request was submitted and we will get back to you as fast as we can for further discussion.',
+                  'Welcome to the Happy Cake Company App.\n\nHere, you will be able to submit an order inquiry once you have given us information about the cake you would like and information about how we can contact you.\n\nOnce the form is completed you should receive an email confirming that inquiry request was submitted and we will get back to you as fast as we can for further discussion.',
                 ),
                 Container(
                     padding: EdgeInsets.only(top: 20),
