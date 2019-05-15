@@ -239,7 +239,7 @@ class _OrderInfoState extends State<OrderInfo> {
   imageSelectorGallery() async {
     galleryFile = await ImagePicker.pickImage(source: ImageSource.gallery,);
     if (galleryFile != null){
-      String newPath = '/data/user/0/com.example.happycake/cache/cakeidea.jpg';
+      String newPath = galleryFile.path+'.jpg';
       File(galleryFile.path).renameSync(newPath);
       setState(() {
        DataStore.attachment = newPath; 

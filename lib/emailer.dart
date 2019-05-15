@@ -18,7 +18,7 @@ class Emailer {
       ..ccRecipients.add(clientEmail)
       ..subject = 'Order Inquiry ${dateTime.month}-${dateTime.day}-${dateTime.year} $clientName'
       ..html = text
-      ..attachments.add(FileAttachment(File(attachment)));
+      ..attachments.add(await FileAttachment(await File(attachment)));
     
     final sendReports = await send(message, smtpServer); // Send the email
 
