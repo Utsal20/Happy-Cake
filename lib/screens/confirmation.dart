@@ -45,7 +45,7 @@ class _ConfirmationState extends State<Confirmation> {
                             ),
                           ),
                           Text(
-                            DataStore.date.substring(0,10),
+                            (DataStore.date == '') ? '' : DataStore.date.substring(0,10),
                           ),
                           Text(
                             DataStore.feeds + ' people',

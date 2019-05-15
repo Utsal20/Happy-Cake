@@ -235,17 +235,14 @@ class _OrderInfoState extends State<OrderInfo> {
     }
   }
 
+
   imageSelectorGallery() async {
     galleryFile = await ImagePicker.pickImage(source: ImageSource.gallery,);
     if (galleryFile != null){
-      var systemTempDir = Directory("/data/user/0/com.example.happycake/cache/");
-        systemTempDir.list(followLinks: false)
-        .listen((FileSystemEntity entity) {
-          if (entity.path.contains(".jpg"))
-            setState(() {
-              DataStore.attachment = entity.path;
-              return;
-            });
+      String newPath = '/data/user/0/com.example.happycake/cache/cakeidea.jpg';
+      File(galleryFile.path).renameSync(newPath);
+      setState(() {
+       DataStore.attachment = newPath; 
       });
     }
   }
