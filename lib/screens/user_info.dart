@@ -15,7 +15,7 @@ class _UserInfoState extends State<UserInfo> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Client Info'),
+          title: Text('Client Contact Information'),
         ),
         body: GestureDetector(
             onHorizontalDragEnd: (DragEndDetails details) {

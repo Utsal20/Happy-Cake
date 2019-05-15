@@ -24,8 +24,9 @@ class _InquiryPageState extends State<InquiryPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
+                Image.asset('lib/icon.png'),
                 Text(
-                  'Welcome to the Happy Cake Company App.\n\nHere, you will be able to submit an order inquiry once you have given us information about the cake you would like and information about how we can contact you.\n\nOnce the form is completed you should receive an email confirming that inquiry request was submitted and we will get back to you as fast as we can for further discussion.',
+                  'Welcome!\nThank you for choosing Happy Cake Company.\n\nThis app will allow you to conviently:\n\n-Get quotes for cakes/cupcakes\n-Reserve date for upcoming orders\n-Send pictures of cake concepts\n-Communicate with cake designers\n\nUpon submitting the inquiry form, you will receive an email confirmation. Through the email provided, a member of our team will follow-up and review your cake ideas and options for your order.\n\nThank you!',
                 ),
                 Container(
                     padding: EdgeInsets.only(top: 20),

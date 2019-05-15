@@ -33,7 +33,7 @@ class _OrderInfoState extends State<OrderInfo> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cake Order Request'),
+        title: Text('Order Request'),
       ),
       body: GestureDetector(
         onHorizontalDragEnd: (DragEndDetails details) {
