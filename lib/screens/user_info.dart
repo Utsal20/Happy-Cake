@@ -147,8 +147,6 @@ class _UserInfoState extends State<UserInfo> {
               ),
 
                     Container(
-                        padding: EdgeInsets.fromLTRB(50,0,50,40),
-
                             child: RaisedButton(
                                 child: Icon(Icons.arrow_forward),
                                 elevation: 4.0,
