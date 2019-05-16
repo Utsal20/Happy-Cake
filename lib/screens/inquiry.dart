@@ -11,7 +11,7 @@ class _InquiryPageState extends State<InquiryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('   About Our App'),
+          title: Text('About Our App'),
         ),
         body: GestureDetector(
             onHorizontalDragEnd: (DragEndDetails details) {
@@ -27,7 +27,7 @@ class _InquiryPageState extends State<InquiryPage> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                 Image.asset(
-                    'lib/icon.png', height: 90, width: 90
+                    'lib/icon_alpha.png', height: 90, width: 90
 
                 ),
 
@@ -58,6 +58,6 @@ class _InquiryPageState extends State<InquiryPage> {
 
                 ])],
             )));
-    
+
   }
 }
