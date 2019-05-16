@@ -12,13 +12,24 @@ class Emailer {
     print(Secrets.email);
     // Create our message.
     final dateTime = new DateTime.now();
-    final message = new Message()
-      ..from = new Address(Secrets.email, clientName)
-      ..recipients.add('happycaketest@gmail.com')
-      ..ccRecipients.add(clientEmail)
-      ..subject = 'Order Inquiry ${dateTime.month}-${dateTime.day}-${dateTime.year} $clientName'
-      ..html = text
-      ..attachments.add(await FileAttachment(await File(attachment)));
+    var message;
+    if (attachment != '') {
+      message = new Message()
+        ..from = new Address(Secrets.email, clientName)
+        ..recipients.add('happycaketest@gmail.com')
+        ..ccRecipients.add(clientEmail)
+        ..subject = 'Order Inquiry ${dateTime.month}-${dateTime.day}-${dateTime.year} $clientName'
+        ..html = text
+        ..attachments.add(await FileAttachment(await File(attachment)));
+    }
+    else {
+      message = new Message()
+        ..from = new Address(Secrets.email, clientName)
+        ..recipients.add('happycaketest@gmail.com')
+        ..ccRecipients.add(clientEmail)
+        ..subject = 'Order Inquiry ${dateTime.month}-${dateTime.day}-${dateTime.year} $clientName'
+        ..html = text;
+    }
     
     final sendReports = await send(message, smtpServer); // Send the email
 

@@ -14,7 +14,9 @@ class _ConfirmationState extends State<Confirmation> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+
           title: Text('Your Request'),
+
         ),
         body: GestureDetector(
         onHorizontalDragEnd: (DragEndDetails details) {

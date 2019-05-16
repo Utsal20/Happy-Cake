@@ -20,6 +20,7 @@ class _InquiryPageState extends State<InquiryPage> {
                 Navigator.of(context).pushNamed('/orderInfo');
             },
             child: ListView(
+
               padding: EdgeInsets.all(30),
                 children: <Widget>[
                 Column(
@@ -36,6 +37,7 @@ class _InquiryPageState extends State<InquiryPage> {
                       'Upon submiting the inquiry form, you will recieve an email confirmation.  '
                       'Through the email provided, a member of our team will follow-up and review your cake ideas and options for your order.\n\n'
                       'Thank you!'
+
                 ),
 
 
@@ -53,7 +55,9 @@ class _InquiryPageState extends State<InquiryPage> {
                         Navigator.of(context).pushNamed('/orderInfo');
                       },
                     ))
+
                 ])],
             )));
+    
   }
 }
