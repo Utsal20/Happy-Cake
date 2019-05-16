@@ -153,7 +153,6 @@ class _OrderInfoState extends State<OrderInfo> {
                       onSaved: (String value) {
                         DataStore.otherOccasion = value;
                       },
-                      validator: _otherValidator,
                     )),
               ),
 
@@ -253,7 +252,7 @@ class _OrderInfoState extends State<OrderInfo> {
     DateTime picked = await showDatePicker(
       context: context,
       initialDate: selectedDate,
-      firstDate: DateTime.now().add(Duration(days: 7)),
+      firstDate: DateTime.now().add(Duration(days: 6)),
       lastDate: DateTime.now().add(Duration(days: 365)),
     );
     if (picked != null && picked != selectedDate) {
@@ -288,12 +287,6 @@ class _OrderInfoState extends State<OrderInfo> {
   String _dropdownValidator (String value) {
     if(value == 'Select') {
       return 'Please enter a function';
-    }
-    return null;
-  }
-  String _otherValidator (String value) {
-    if(value.isEmpty && DataStore.occasion == 'Other'){
-      return 'Please specify the occasion';
     }
     return null;
   }
