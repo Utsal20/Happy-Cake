@@ -22,7 +22,7 @@ class _UserInfoState extends State<UserInfo> {
               if (details.primaryVelocity == 0) return;
               if (details.primaryVelocity.compareTo(0) == -1)
                 if(_validateInputs())
-                Navigator.of(context).pushNamed('/confirmation');
+                Navigator.of(context).pushNamed('/allInfo');
               if (details.primaryVelocity.compareTo(0) != -1)
                 Navigator.of(context).pop();
             },
@@ -51,7 +51,9 @@ class _UserInfoState extends State<UserInfo> {
                           keyboardType: TextInputType.text,
                           onSaved: (String value) {
                             DataStore.name = value;
-                          }),
+                          },
+                          validator: _nameValidation,
+                          ),
                     ),
 
                     Container(
@@ -156,7 +158,7 @@ class _UserInfoState extends State<UserInfo> {
                                 splashColor: Theme.of(context).accentColor,
                                 onPressed: () {
                                   if(_validateInputs())
-                                    Navigator.of(context).pushNamed('/confirmation');
+                                    Navigator.of(context).pushNamed('/allInfo');
                                 }),
                         )
 
@@ -203,7 +205,7 @@ class _UserInfoState extends State<UserInfo> {
   }
 
   String _phoneValidation(String value) {
-    if (value.length != 10) {
+    if (value.length < 10) {
       return 'Please enter a valid phone number';
     } else {
       return null;
