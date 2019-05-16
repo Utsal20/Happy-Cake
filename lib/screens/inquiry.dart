@@ -11,7 +11,7 @@ class _InquiryPageState extends State<InquiryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('About'),
+          title: Text('   About Our App'),
         ),
         body: GestureDetector(
             onHorizontalDragEnd: (DragEndDetails details) {
@@ -19,14 +19,27 @@ class _InquiryPageState extends State<InquiryPage> {
               if (details.primaryVelocity.compareTo(0) == -1)
                 Navigator.of(context).pushNamed('/orderInfo');
             },
-            child: Container(
+            child: ListView(
               padding: EdgeInsets.all(30),
-                child: Column(
+                children: <Widget>[
+                Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                Text(
-                  'Welcome to the Happy Cake Company App.\n\nHere, you will be able to submit an order inquiry once you have given us information about the cake you would like and information about how we can contact you.\n\nOnce the form is completed you should receive an email confirming that inquiry request was submitted and we will get back to you as fast as we can for further discussion.',
+                children: <Widget>[
+                Image.asset(
+                    'lib/icon.png', height: 90, width: 90
+
                 ),
+
+                Text(
+                  '\n\nWelcome! \n\nThank you for choosing Happy Cake Company.\n\nThis app will conveniently:\n\n'
+                      '- Get quotes for cakes/cupcakes\n- Reserve dates for upcoming orders\n- Send pictures of cake concepts\n- Communicate with cake designers\n\n'
+                      'Upon submiting the inquiry form, you will recieve an email confirmation.  '
+                      'Through the email provided, a member of our team will follow-up and review your cake ideas and options for your order.\n\n'
+                      'Thank you!'
+                ),
+
+
+
                 Container(
                     padding: EdgeInsets.only(top: 20),
                     child: RaisedButton(
@@ -40,7 +53,7 @@ class _InquiryPageState extends State<InquiryPage> {
                         Navigator.of(context).pushNamed('/orderInfo');
                       },
                     ))
-              ],
-            ))));
+                ])],
+            )));
   }
 }

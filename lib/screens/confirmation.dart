@@ -14,7 +14,7 @@ class _ConfirmationState extends State<Confirmation> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Order Inquiry Confirmation'),
+          title: Text('Your Request'),
         ),
         body: GestureDetector(
         onHorizontalDragEnd: (DragEndDetails details) {
@@ -37,32 +37,51 @@ class _ConfirmationState extends State<Confirmation> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
+
                           Text(
-                            'Your Order:\n',
+                            'Request:\n',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
                             ),
                           ),
                           Text(
-                            (DataStore.date == '') ? '' : DataStore.date.substring(0,10),
+                            (DataStore.date == '') ? '' : 'Date: ' + DataStore.date.substring(0,10),
                           ),
                           Text(
-                            DataStore.feeds + ' people',
+                            ('Serves: ') + DataStore.feeds,
                           ),
                           Text(
-                            (DataStore.occasion == 'Other') ? DataStore.otherOccasion : DataStore.occasion,
+                            (DataStore.occasion == 'Other') ? 'Occasion: ' + DataStore.otherOccasion : 'Occasion: ' + DataStore.occasion,
                           ),
                           Text(
-                            DataStore.decorationNotes,
+                            'Notes: ' + DataStore.decorationNotes,
                           ),
+
+                          Text(
+                            '\nYour Contact Information:\n',
+                            style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
+                          ),
+                      Text(
+                        ' Name: ' + DataStore.name,
+                      ),
+                      Text(
+                        ' Phone: ' + DataStore.phone,
+                      ),
+                      Text(
+                        ' Email: ' + DataStore.email,
+
+                      ),
                       ],),
                     ),
-                    Container(padding: const EdgeInsets.only(bottom: 50),
+                    Container(padding: const EdgeInsets.only(bottom: 20, top: 5),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text('Thank you for choosing Happy Cake Co!\nWe will review your request and follow-up shortly.'),
+                          Text('Thank you for choosing Happy Cake Company!\nWe will review your request and follow-up shortly.'),
                       ],),
                     ),
                     Container(padding: const EdgeInsets.only(bottom: 50),
