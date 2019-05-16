@@ -9,14 +9,17 @@ class _ConfirmationState extends State<Confirmation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+InfoCheckPage
       appBar: AppBar(
         title: Text('Order Request Confirmation'),
       ),
       body: GestureDetector(
+
         onHorizontalDragEnd: (DragEndDetails details) {
           if (details.primaryVelocity.compareTo(0) != -1)
             Navigator.of(context).pop();
         },
+InfoCheckPage
         child: Column(
           
           children: <Widget>[
@@ -24,7 +27,7 @@ class _ConfirmationState extends State<Confirmation> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text('Thank you for choosing Happy Cake Co!\nWe will review your request and follow-up shortly.'),
+                          Text('Thank you for choosing Happy Cake Company!\nWe will review your request and follow-up shortly.'),
                       ],),
                     ),
                     Container(padding: const EdgeInsets.fromLTRB(30, 30, 30, 30),
