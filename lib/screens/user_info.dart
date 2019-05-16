@@ -51,7 +51,9 @@ class _UserInfoState extends State<UserInfo> {
                           keyboardType: TextInputType.text,
                           onSaved: (String value) {
                             DataStore.name = value;
-                          }),
+                          },
+                          validator: _nameValidation,
+                          ),
                     ),
 
                     Container(

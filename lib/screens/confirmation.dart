@@ -9,7 +9,6 @@ class _ConfirmationState extends State<Confirmation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-InfoCheckPage
       appBar: AppBar(
         title: Text('Order Request Confirmation'),
       ),
@@ -19,7 +18,6 @@ InfoCheckPage
           if (details.primaryVelocity.compareTo(0) != -1)
             Navigator.of(context).pop();
         },
-InfoCheckPage
         child: Column(
           
           children: <Widget>[
