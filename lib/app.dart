@@ -9,6 +9,7 @@ class HappyCakeApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Happy Cake',
+        debugShowCheckedModeBanner: false,
       theme: new ThemeData(
         brightness: Brightness.light,
         primaryColor: Color(0xFFfd689a),

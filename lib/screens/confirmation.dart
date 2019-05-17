@@ -10,7 +10,14 @@ class _ConfirmationState extends State<Confirmation> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Order Request Confirmation'),
+        textTheme: TextTheme(
+          title: TextStyle(
+            ///fontFamily: 'Anton',
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        title: Text('Request Confirmation'), centerTitle: true,
       ),
       body: GestureDetector(
 
