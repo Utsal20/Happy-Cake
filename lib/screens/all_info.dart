@@ -14,8 +14,14 @@ class _AllInfoState extends State<AllInfo> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-
-          title: Text('Your Request'),
+          textTheme: TextTheme(
+            title: TextStyle(
+              ///fontFamily: 'Anton',
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          title: Text('Your Request'), centerTitle: true,
 
         ),
         body: GestureDetector(
@@ -47,16 +53,16 @@ class _AllInfoState extends State<AllInfo> {
                             ),
                           ),
                           Text(
-                            (DataStore.date == '') ? '' : 'Date: ' + DataStore.date.substring(0,10),
+                            (DataStore.date == '') ? '' : 'Date: ' + DataStore.date.substring(0,10),style: TextStyle(fontSize: 18),
                           ),
                           Text(
-                            ('Serves: ') + DataStore.feeds,
+                            'Serves:' + DataStore.feeds, style: TextStyle(fontSize: 18),
                           ),
                           Text(
-                            (DataStore.occasion == 'Other') ? 'Occasion: ' + DataStore.otherOccasion : 'Occasion: ' + DataStore.occasion,
+                            (DataStore.occasion == 'Other') ? 'Occasion: ' + DataStore.otherOccasion : 'Occasion: ' + DataStore.occasion, style: TextStyle(fontSize: 18),
                           ),
                           Text(
-                            'Notes: ' + DataStore.decorationNotes,
+                            'Notes: ' + DataStore.decorationNotes, style: TextStyle(fontSize: 18),
                           ),
 
                           Text(
@@ -67,15 +73,19 @@ class _AllInfoState extends State<AllInfo> {
                           ),
                           ),
                       Text(
-                        ' Name: ' + DataStore.name,
+                        'Name: ' + DataStore.name, style: TextStyle(fontSize: 18),
                       ),
                       Text(
-                        ' Phone: ' + DataStore.phone,
+                        'Phone: ' + DataStore.phone, style: TextStyle(fontSize: 18),
                       ),
                       Text(
-                        ' Email: ' + DataStore.email,
+                        'Email: ' + DataStore.email, style: TextStyle(fontSize: 18)
 
                       ),
+                      Text(
+                        (DataStore.referral == 'Other') ? 'Referral: ' + DataStore.otherReferral : 'Referral: ' + DataStore.referral, style: TextStyle(fontSize: 18),
+                      ),
+
                       ],),
                     ),
                     submitted

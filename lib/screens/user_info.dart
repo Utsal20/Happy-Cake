@@ -15,7 +15,14 @@ class _UserInfoState extends State<UserInfo> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Client Contact Information'),
+          textTheme: TextTheme(
+            title: TextStyle(
+              ///fontFamily: 'Anton',
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          title: Text('Contact Information'), centerTitle: true,
         ),
         body: GestureDetector(
             onHorizontalDragEnd: (DragEndDetails details) {
@@ -46,7 +53,7 @@ class _UserInfoState extends State<UserInfo> {
                           initialValue: DataStore.name,
                           decoration: InputDecoration(
                             hintText: 'John Doe',
-                            labelText: 'Name',
+                            labelText: 'Name', labelStyle: TextStyle(fontSize: 18)
                           ),
                           keyboardType: TextInputType.text,
                           onSaved: (String value) {
@@ -63,7 +70,7 @@ class _UserInfoState extends State<UserInfo> {
                         initialValue: DataStore.phone,
                         decoration: InputDecoration(
                           hintText: '1234567890',
-                          labelText: 'Phone',
+                          labelText: 'Phone', labelStyle: TextStyle(fontSize: 18),
                         ),
                         keyboardType: TextInputType.number,
                         onSaved: (String value) {
@@ -80,7 +87,7 @@ class _UserInfoState extends State<UserInfo> {
                         initialValue: DataStore.email,
                         decoration: InputDecoration(
                           hintText: 'you@example.com',
-                          labelText: 'Email',
+                          labelText: 'Email', labelStyle: TextStyle(fontSize: 18),
                         ),
                         keyboardType: TextInputType.emailAddress,
                         onSaved: (String value) {
@@ -97,8 +104,7 @@ class _UserInfoState extends State<UserInfo> {
                           Text(
                             'How did you hear about us?  ',
                             textAlign: TextAlign.left,
-                            style:
-                            Theme.of(context).textTheme.subhead,
+                            style: TextStyle(fontSize: 18, color: Colors.black54),
                           ),
                           Flexible(
                             child: DropdownButtonFormField<String>(
@@ -140,7 +146,7 @@ class _UserInfoState extends State<UserInfo> {
                       decoration: InputDecoration(
                         hintText:
                         'Enter how you heard about us',
-                        labelText: 'Other Referral',
+                        labelText: 'Other Referral',labelStyle: TextStyle(fontSize: 18),
                       ),
                       onSaved: (String value) {
                         DataStore.otherReferral = value;

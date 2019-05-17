@@ -11,7 +11,18 @@ class _InquiryPageState extends State<InquiryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('About Our App'),
+
+          textTheme: TextTheme(
+            title: TextStyle(
+              ///fontFamily: 'Anton',
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
+            ),
+
+
+          ),
+          title: Text('About Our App') , centerTitle: true,
+
         ),
         body: GestureDetector(
             onHorizontalDragEnd: (DragEndDetails details) {
@@ -21,25 +32,21 @@ class _InquiryPageState extends State<InquiryPage> {
             },
             child: ListView(
 
-              padding: EdgeInsets.all(30),
+              padding: EdgeInsets.fromLTRB(30, 10, 30, 30),
                 children: <Widget>[
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                 Image.asset(
                     'lib/icon_alpha.png', height: 90, width: 90
-
                 ),
 
-                Text(
-                  '\n\nWelcome! \n\nThank you for choosing Happy Cake Company.\n\nThis app will conveniently:\n\n'
-                      '- Get quotes for cakes/cupcakes\n- Reserve dates for upcoming orders\n- Send pictures of cake concepts\n- Communicate with cake designers\n\n'
-                      'Upon submiting the inquiry form, you will recieve an email confirmation.  '
-                      'Through the email provided, a member of our team will follow-up and review your cake ideas and options for your order.\n\n'
-                      'Thank you!'
+                Text('\nWelcome!', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
 
-                ),
-
+                Text('\nThank you for choosing Happy Cake Company.\n\nThis app will conveniently:\n', style: TextStyle(fontSize:18)),
+                Text('- Get quotes for cakes/cupcakes\n- Reserve dates for upcoming orders\n- Send pictures of cake concepts\n- Communicate with cake designers\n', style: TextStyle(fontStyle: FontStyle.italic, fontSize: 16)),
+                Text('Upon submitting the inquiry form, you will recieve an email confirmation. Through the email provided, a member of our team will follow-up and review your cake ideas and options for your order.\n', style: TextStyle( fontSize: 18)),
+                Text('Thank you!', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
 
 
                 Container(

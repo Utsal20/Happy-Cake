@@ -33,7 +33,14 @@ class _OrderInfoState extends State<OrderInfo> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Order Request'),
+        textTheme: TextTheme(
+          title: TextStyle(
+            ///fontFamily: 'Anton',
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        title: Text('Order Request'), centerTitle: true,
       ),
       body: GestureDetector(
         onHorizontalDragEnd: (DragEndDetails details) {
@@ -69,7 +76,7 @@ class _OrderInfoState extends State<OrderInfo> {
 
                       child: TextFormField(
                         decoration: InputDecoration(
-                          labelText: 'Date Needed:',
+                          labelText: 'Date Needed:', labelStyle: TextStyle(fontSize: 18),
                         ),
                         controller: _textController,
                         validator: _dateValidator,
@@ -85,7 +92,7 @@ class _OrderInfoState extends State<OrderInfo> {
                   initialValue: DataStore.feeds,
                   decoration: InputDecoration(
                     hintText: 'Ex: 200',
-                    labelText: 'How many people:',
+                    labelText: 'How many people:',labelStyle: TextStyle(fontSize: 18),
                   ),
                   keyboardType: TextInputType.number,
                   onSaved: (String value) {
@@ -103,7 +110,7 @@ class _OrderInfoState extends State<OrderInfo> {
                     Text(
                       'What\'s the occasion?   ',
                       textAlign: TextAlign.left,
-                      style: Theme.of(context).textTheme.subhead,
+                      style: TextStyle(fontSize: 18, color: Colors.black54),
                     ),
                     Flexible(
                       child: DropdownButtonFormField<String>(
@@ -148,7 +155,7 @@ class _OrderInfoState extends State<OrderInfo> {
                     child: TextFormField(
                       decoration: InputDecoration(
                         hintText: 'Please enter the occasion',
-                        labelText: 'Other Occasion',
+                        labelText: 'Other Occasion', labelStyle: TextStyle(fontSize: 18)
                       ),
                       onSaved: (String value) {
                         DataStore.otherOccasion = value;
@@ -165,7 +172,7 @@ class _OrderInfoState extends State<OrderInfo> {
                 decoration: InputDecoration(
                 hintText:
                 'Ex: I want the cake to be yellow flowers',
-                labelText: 'Decoration Notes:',
+                labelText: 'Decoration Notes:', labelStyle: TextStyle(fontSize: 18),
                 ),
                 keyboardType: TextInputType.text,
                 maxLines: null,
@@ -246,7 +253,7 @@ class _OrderInfoState extends State<OrderInfo> {
     }
   }
 
-  DateTime selectedDate = DateTime.now().add(Duration(days: 8));
+  DateTime selectedDate = DateTime.now().add(Duration(days: 7));
 
   _selectDate() async {
     DateTime picked = await showDatePicker(
