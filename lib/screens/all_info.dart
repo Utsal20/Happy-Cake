@@ -1,3 +1,11 @@
+///Jacob Brook, Alex Gonzalez, Utsal Shrestha
+///Happy Cake Company App
+///Last edited May 17th, 2019
+///
+/// This dart file is what displays the information that the user provided back to the user. It list out the order info then the client information
+/// before displaying a button that allows you to send the email to Happy Cake Company
+
+
 import 'package:flutter/material.dart';
 import 'data.dart';
 import 'package:happy_cake/emailer.dart';
@@ -8,22 +16,26 @@ class AllInfo extends StatefulWidget {
 }
 
 class _AllInfoState extends State<AllInfo> {
+  ///Checks if the email actually sent, set to false
   bool submitted = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          textTheme: TextTheme(
+
+          ///The beginning of all the screens will have this text theme for the titles it just makes the font bigger and bolded
+        textTheme: TextTheme(
             title: TextStyle(
-              ///fontFamily: 'Anton',
               fontSize: 30,
               fontWeight: FontWeight.bold,
             ),
           ),
-          title: Text('Your Request'), centerTitle: true,
+          title: Text('Your Request'), centerTitle: true, ///The title of the page, and is centered
 
         ),
+
+        ///This gesture detector is for swiping the page left and right
         body: GestureDetector(
         onHorizontalDragEnd: (DragEndDetails details) {
           if (details.primaryVelocity == 0)
@@ -32,11 +44,15 @@ class _AllInfoState extends State<AllInfo> {
             Navigator.of(context).pop();
         },
         child: Container(
+
+          ///The majority of the pages are in ListView because it avoided the issue of widgets overlaying each other. It allows the user to scoll up and down
+          ///if the content of the pages does not fit the screen.
             child: ListView(
                   shrinkWrap: true,
                   padding: const EdgeInsets.all(20.0),
                   
-              children: <Widget>[
+              children: <Widget>[ ///This allows us to declare multiple children with in the ListView
+
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
@@ -45,13 +61,16 @@ class _AllInfoState extends State<AllInfo> {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
 
-                          Text(
+                          Text( ///Header before the cake request is displayed back to user
                             'Request:\n',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
                             ),
                           ),
+
+                          /// The next four texts below recall the information that the user entered before and then displays it back to the user.
+                          /// This includes the date, feeds, occasion with a conditional which deals with other, and notes
                           Text(
                             (DataStore.date == '') ? '' : 'Date: ' + DataStore.date.substring(0,10),style: TextStyle(fontSize: 18),
                           ),
@@ -65,13 +84,17 @@ class _AllInfoState extends State<AllInfo> {
                             'Notes: ' + DataStore.decorationNotes, style: TextStyle(fontSize: 18),
                           ),
 
-                          Text(
+                          Text( ///Header before the client information is displayed again
                             '\nYour Contact Information:\n',
                             style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
                           ),
                           ),
+
+                      /// The next four texts below recall the information that the user entered before and then displays it back to the user.
+                      /// This includes the name, phone, email, and referral that does have a conditional for other
+
                       Text(
                         'Name: ' + DataStore.name, style: TextStyle(fontSize: 18),
                       ),
@@ -88,6 +111,9 @@ class _AllInfoState extends State<AllInfo> {
 
                       ],),
                     ),
+
+                    ///This is called when the submit button has been pressed
+                    ///STILL NEEDS A CONDITIONAL FOR WHEN IT IS NOT SENT
                     submitted
                         ? Text(
                             'Your order has been sent!',
@@ -96,6 +122,8 @@ class _AllInfoState extends State<AllInfo> {
                               color: Theme.of(context).accentColor,
                             ),
                           )
+
+                    ///Submit button which sends the email and moves to the next page
                         : ButtonTheme(
                           minWidth: 150,
                           child: RaisedButton(

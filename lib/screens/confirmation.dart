@@ -1,3 +1,11 @@
+///Jacob Brook, Alex Gonzalez, Utsal Shrestha
+///Happy Cake Company App
+///Last edited May 17th, 2019
+
+///This page thanks the user for choosing Happy Cake Company and gives them contact information to reach the company if there are any issues.
+///This was implemented so the app felt like it had an end to it rather than just submitting the email and leaving the user clueless.
+
+
 import 'package:flutter/material.dart';
 
 class Confirmation extends StatefulWidget {
@@ -10,22 +18,23 @@ class _ConfirmationState extends State<Confirmation> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        textTheme: TextTheme(
+
+        ///The beginning of all the screens will have this text theme for the titles it just makes the font bigger and bolded
+      textTheme: TextTheme(
           title: TextStyle(
-            ///fontFamily: 'Anton',
             fontSize: 30,
             fontWeight: FontWeight.bold,
           ),
         ),
-        title: Text('Request Confirmation'), centerTitle: true,
+        title: Text('Request Confirmation'), centerTitle: true, ///The title of the page and it's centered
       ),
-      body: GestureDetector(
+      body: GestureDetector(  ///This gesture detector is for swiping the page left and right
 
         onHorizontalDragEnd: (DragEndDetails details) {
           if (details.primaryVelocity.compareTo(0) != -1)
             Navigator.of(context).pop();
         },
-        child: Column(
+        child: Column( ///A column is a simple way to organize and display the text below
           
           children: <Widget>[
             Container(padding: const EdgeInsets.fromLTRB(30,30,30,30),
@@ -36,8 +45,11 @@ class _ConfirmationState extends State<Confirmation> {
                           Text( 'We will review your request and follow-up shortly.', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
                       ],),
                     ),
+
+
+
                     Container(padding: const EdgeInsets.fromLTRB(30, 30, 30, 30),
-                      child: Column(
+                      child: Column( ///Another column and container displaying the contact information for the store
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
                           Text(

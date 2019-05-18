@@ -1,3 +1,11 @@
+///Jacob Brook, Alex Gonzalez, Utsal Shrestha
+///Happy Cake Company App
+///Last edited May 17th, 2019
+///
+/// This dart file is the class/function which sends the email to Happy Cake Company and CCs the user. As of right now it intakes the email and password given
+/// in secret.dart and sends it from that email.
+
+
 // https://pub.dartlang.org/packages/mailer#-readme-tab-
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server/gmail.dart';

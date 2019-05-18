@@ -1,3 +1,10 @@
+///Jacob Brook, Alex Gonzalez, Utsal Shrestha
+///Happy Cake Company App
+///Last edited May 17th, 2019
+
+///This dart file is meant to declare the theme of the different font styles we use throughout the app.
+///All of the different screens that will be used are imported into this file so that they can be called throughout the app
+
 import 'package:flutter/material.dart';
 import 'package:happy_cake/screens/inquiry.dart';
 import 'package:happy_cake/screens/order_info.dart';
@@ -5,12 +12,15 @@ import 'package:happy_cake/screens/user_info.dart';
 import 'package:happy_cake/screens/all_info.dart';
 import 'package:happy_cake/screens/confirmation.dart';
 
+///Creates a class for the app to be constructed... In Flutter nearly everything is a widget including the app itself
 class HappyCakeApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
+
+      ///Title of the App/Page which never really comes up
       title: 'Happy Cake',
-        debugShowCheckedModeBanner: false,
-      theme: new ThemeData(
+        debugShowCheckedModeBanner: false, ///Removes the debug banner from the corner
+      theme: new ThemeData( ///Creating a new theme which is used throughout the app
         brightness: Brightness.light,
         primaryColor: Color(0xFFfd689a),
         accentColor: Color(0xFF66d9c1),
@@ -31,12 +41,16 @@ class HappyCakeApp extends StatelessWidget {
           ),
         ),
       ),
+
+      ///Sets the opening page of the app to the inquiry page (which explains what the app is doing)
       home: InquiryPage(),
+
+      ///This is where we declare the route of the pages which will be accessed throughout the app
       routes: <String, WidgetBuilder> {
-        '/inquiryPage': (BuildContext context) => InquiryPage(),
+        '/inquiryPage': (BuildContext context) => InquiryPage(), ///Also known as welcome page
         '/orderInfo': (BuildContext context) => OrderInfo(),
         '/clientInfo': (BuildContext context) => UserInfo(),
-        '/allInfo': (BuildContext context) => AllInfo(),
+        '/allInfo': (BuildContext context) => AllInfo(), ///This page that displays all of the information the user provided to confirm before submitting the inquiry
         '/confirmation': (BuildContext context) => Confirmation(),
       }
     );
